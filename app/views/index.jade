@@ -1,100 +1,87 @@
 doctype html
-// [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]
-// [if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]
-// [if IE 8]>         <html class="no-js lt-ie9"> <![endif]
-// [if gt IE 8]><!
-html.no-js
-  //<![endif]
-  head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
-    meta(name="google-site-verification", content="9IzBczLunA3sbocGcB98kdaTfC33WNjrC36rTJSwZ7I")
-    base(href="/")
-    title
-    meta(name="description", content="")
-    meta(name="viewport", content="width=device-width")
-    // Place favicon.ico and apple-touch-icon.png in the root directory
-    <!-- build:css(app) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  body(ng-app="mentelinApp")
-    //[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-      <![endif]
-    //[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-      <![endif]
 
-    // Add your site or application content here
+html.no-js(lang="ru")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1, minimal-ui")
 
-    div(class="container" ng-view)
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(http-equiv="cleartype" content="on")
 
-    // Google Analytics: change UA-XXXXX-X to be your site's ID.
-    script.
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-39979449-1', 'mentelin.ru');
-      ga('require', 'displayfeatures');
-      ga('send', 'pageview');
+        meta(name="google-site-verification", content="9IzBczLunA3sbocGcB98kdaTfC33WNjrC36rTJSwZ7I")
 
-      (function (d, w, c) {
-        (w[c] = w[c] || []).push(function () {
-          try {
-            w.yaCounter20900419 = new Ya.Metrika({
-              id:20900419,
-              webvisor:true,
-              clickmap:true,
-              trackLinks:true,
-              accurateTrackBounce:true,
-              trackHash:true
-            });
-          } catch (e) { }
-        });
+        //- Add to homescreen for Chrome on Android
+        meta(name="mobile-web-app-capable", content="yes")
 
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+        //- Add to homescreen for Safari on iOS
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        meta(name="apple-mobile-web-app-title", content="Mentelin")
 
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-      })(document, window, "yandex_metrika_callbacks");
+        //- Tile icon for Win8 (144x144-precomposed.png + tile color HEX)
+        meta(name="msapplication-TileImage", content="images/touch-icons/ms-touch-icon-144x144-precomposed.png")
+        meta(name="msapplication-TileColor", content="#e55d40")
 
-    noscript
-      img.hidden(src="//mc.yandex.ru/watch/20900419", alt="metrika")
+        base(href="/")
 
-    <!-- build:js(app) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/navbar.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/signup.js"></script>
-    <script src="scripts/controllers/settings.js"></script>
-    <script src="scripts/services/auth.js"></script>
-    <script src="scripts/services/session.js"></script>
-    <script src="scripts/services/user.js"></script>
-    <script src="scripts/directives/mongooseError.js"></script>
-    <!-- endbuild -->
+        title Mentelin
 
+        meta(name="author", content="Mentelin")
+        meta(name="description", content="Mentelin")
+        meta(name="keywords", content="Mentelin")
+
+        //- Place favicon.ico and apple-touch-icon.png in the root directory
+
+        //- Generic Icon for touch 57x57.png
+        link(rel="shortcut icon", href="images/touch-icons/touch-icon-57x57.png")
+
+        //- Chrome Add to Homescreen 196x196.png
+        link(rel="shortcut icon", href="images/touch-icons/touch-icon-196x196.png", sizes="196x196")
+
+        <!-- build:css(app) styles/main.css -->
+        <!-- bower:css -->
+        link(rel="stylesheet", href="bower_components/bootstrap/dist/css/bootstrap.css")
+        <!-- endbower -->
+
+        link(rel="stylesheet", href="styles/main.css")
+        <!-- endbuild -->
+
+    body(ng-app="mentelinApp")
+        //[if lt IE 9]>
+            <div class="container alert alert-danger fade in">
+                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button>
+                You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> to better experience this site.
+            </div>
+
+            <script src="bower_components/es5-shim/es5-shim.js"></script>
+            <script src="bower_components/json3/lib/json3.min.js"></script>
+            <![endif]
+
+        div(class="container", ng-view)
+
+        noscript
+            img.hidden(src="//mc.yandex.ru/watch/20900419", alt="metrika")
+
+        <!-- build:js(app) scripts/scripts.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endbower -->
+
+        script(src="scripts/seo.js")
+        script(src="scripts/app.js")
+        script(src="scripts/controllers/main.js")
+        script(src="scripts/controllers/navbar.js")
+        script(src="scripts/controllers/login.js")
+        script(src="scripts/controllers/signup.js")
+        script(src="scripts/controllers/settings.js")
+        script(src="scripts/services/auth.js")
+        script(src="scripts/services/session.js")
+        script(src="scripts/services/user.js")
+        script(src="scripts/directives/mongooseError.js")
+        <!-- endbuild -->
