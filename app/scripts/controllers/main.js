@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mentelinApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, $upload) {
     $http.get('/api/books')
       .success(function (data) {
         $scope.books = data;
@@ -26,7 +26,7 @@ angular.module('mentelinApp')
           book;
 
       for (var i = 0; books.length > i; i++) {
-        if (books[i]._id == id) {
+        if (books[i]._id === id) {
           book = books[i];
         }
       }
@@ -39,6 +39,23 @@ angular.module('mentelinApp')
         .error(function (data) {
           console.log('Error: ' + data);
         });
+    };
+
+    $scope.onFileSelect = function($files) {
+      for (var i = 0; i < $files.length; i++) {
+        var file = $files[i];
+
+        $scope.upload = $upload.upload({
+            url: '/api/books/upload',
+            file: file,
+          })
+          .progress(function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+          })
+          .success(function (data, status, headers, config) {
+            // console.log(data);
+          });
+      }
     };
 
     $scope.deleteBook = function(id) {

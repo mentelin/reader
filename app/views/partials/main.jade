@@ -1,33 +1,50 @@
-h1(ng-show="currentUser") {{ currentUser.name }}
+h1(data-ng-show="currentUser") {{ currentUser.name }}
 
-.well(ng-show="currentUser")
+.well(data-ng-show="currentUser")
+    h2 Upload book
+
+    form.form(name="form", enctype="multipart/form-data", novalidate)
+        .form-group
+            label Book file
+            input.form-control(type="file", name="file", data-ng-file-select="onFileSelect($files)")
+
+    .jumbotron(data-ng-file-drop="onFileSelect($files)") Drag and Drop
+
+    .progress
+        .progress-bar(role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%;")
+            span {{ progress }}
+            span(data-ng-show="progress") %
+
+    button.btn.btn-danger(ng-click="upload.abort()") Cancel
+
+.well(data-ng-show="currentUser")
     h2 Create book
 
-    form.form(name="form", ng-submit="createBook()", novalidate)
+    form.form(name="form", novalidate, data-ng-submit="createBook()")
         .form-group
             label Book name
-            input.form-control(type="text", name="name", value="{{ book.name }}", ng-model="book.name")
+            input.form-control(type="text", name="name", value="{{ book.name }}", data-ng-model="book.name")
 
         .form-group
             label Book info
-            textarea.form-control(name="info", value="{{ book.info }}", ng-model="book.info")
+            textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
 
-        button.btn.btn-lg.btn-primary(type="submit") Create
+        button.btn.btn-primary(type="submit") Create
 
-div(ng-repeat="book in books")
+div(data-ng-repeat="book in books")
     h4 {{ book.name }}
     p {{ book.info }}
 
-    .well(ng-show="currentUser")
-        form.form(name="form", ng-submit="updateBook(book._id)", novalidate)
+    .well(data-ng-show="currentUser")
+        form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")
             .form-group
                 label Book name
-                input.form-control(type="text", name="name", value="{{ book.name }}", ng-model="book.name")
+                input.form-control(type="text", name="name", value="{{ book.name }}", data-ng-model="book.name")
 
             .form-group
                 label Book info
-                textarea.form-control(name="info", value="{{ book.info }}", ng-model="book.info")
+                textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
 
             .btn-toolbar
-                button.btn.btn-lg.btn-primary(type="submit") Save changes
-                button.btn.btn-lg.btn-danger(type="button", ng-click="deleteBook(book._id)") Delete book
+                button.btn.btn-primary(type="submit") Save changes
+                button.btn.btn-danger(type="button", data-ng-click="deleteBook(book._id)") Delete book
