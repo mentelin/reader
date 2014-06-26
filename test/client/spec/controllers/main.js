@@ -12,7 +12,7 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/awesomeThings')
+    $httpBackend.expectGET('/api/books')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -20,9 +20,9 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings).toBeUndefined();
+  it('should attach a list of books to the scope', function () {
+    expect(scope.books).toBeUndefined();
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+    expect(scope.books.length).toBe(4);
   });
 });
