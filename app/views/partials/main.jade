@@ -1,7 +1,33 @@
-div(ng-include="\'partials/navbar\'")
-
 h1(ng-show="currentUser") {{ currentUser.name }}
 
-div(ng-repeat="thing in awesomeThings")
-    h4 {{ thing.name }}
-    p {{ thing.info }}
+.well(ng-show="currentUser")
+    h2 Create book
+
+    form.form(name="form", ng-submit="createBook()", novalidate)
+        .form-group
+            label Book name
+            input.form-control(type="text", name="name", value="{{ book.name }}", ng-model="book.name")
+
+        .form-group
+            label Book info
+            textarea.form-control(name="info", value="{{ book.info }}", ng-model="book.info")
+
+        button.btn.btn-lg.btn-primary(type="submit") Create
+
+div(ng-repeat="book in books")
+    h4 {{ book.name }}
+    p {{ book.info }}
+
+    .well(ng-show="currentUser")
+        form.form(name="form", ng-submit="updateBook(book._id)", novalidate)
+            .form-group
+                label Book name
+                input.form-control(type="text", name="name", value="{{ book.name }}", ng-model="book.name")
+
+            .form-group
+                label Book info
+                textarea.form-control(name="info", value="{{ book.info }}", ng-model="book.info")
+
+            .btn-toolbar
+                button.btn.btn-lg.btn-primary(type="submit") Save changes
+                button.btn.btn-lg.btn-danger(type="button", ng-click="deleteBook(book._id)") Delete book

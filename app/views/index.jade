@@ -57,7 +57,9 @@ html.no-js(lang="ru")
             <script src="bower_components/json3/lib/json3.min.js"></script>
             <![endif]
 
-        div(class="container", ng-view)
+        div(class="container")
+            div(ng-include="'partials/navbar.html'")
+            div(ng-view)
 
         noscript
             img.hidden(src="//mc.yandex.ru/watch/20900419", alt="metrika")
