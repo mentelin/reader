@@ -70,6 +70,12 @@ angular.module('mentelinApp')
         });
     };
 
+    $scope.readBook = function (url) {
+      // var Book = ePub(url);
+
+      // Book.renderTo("epub");
+    };
+
     $scope.updateBook = function (id) {
       var books = angular.fromJson($scope.books),
           book;
