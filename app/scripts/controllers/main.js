@@ -10,7 +10,7 @@ angular.module('mentelinApp')
         console.log('Error: ' + data);
       });
 
-    $http.get('/api/books/upload')
+    $http.get('/api/upload')
       .success(function (data) {
         $scope.files = data;
       })
@@ -23,7 +23,7 @@ angular.module('mentelinApp')
         var file = $files[i];
 
         $scope.upload = $upload.upload({
-            url: '/api/books/upload',
+            url: '/api/upload',
             file: file
           })
           .progress(function (evt) {
@@ -38,7 +38,7 @@ angular.module('mentelinApp')
     $scope.deleteFile = function (file) {
       $http.delete('/books/' + file)
         .success(function (data) {
-          $scope.books = data;
+          $scope.files = data;
         })
         .error(function (data) {
           console.log('Error: ' + data);

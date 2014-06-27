@@ -6,9 +6,9 @@ h1(data-ng-show="currentUser") {{ currentUser.name }}
     form.form(name="form", enctype="multipart/form-data", novalidate)
         .form-group
             label Book file
-            input.form-control(type="file", name="file", data-ng-file-select="onFileSelect($files)")
+            input.form-control(type="file", name="file", data-ng-file-select="uploadFile($files)")
 
-    .jumbotron(data-ng-file-drop="onFileSelect($files)") Drag and Drop
+    .jumbotron(data-ng-file-drop="uploadFile($files)") Drag and Drop
 
     .progress
         .progress-bar(role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%;")
@@ -17,12 +17,15 @@ h1(data-ng-show="currentUser") {{ currentUser.name }}
 
     button.btn.btn-danger(ng-click="upload.abort()") Cancel
 
-.well(data-ng-show="currentUser")
+div(data-ng-show="currentUser")
     h2 List of files
 
-    ul(data-ng-repeat="file in files")
-        li {{ file[0].name }}
-            button.btn.btn-danger(ng-click="deleteFile(file[0].name)") Delete
+    div(data-ng-repeat="list in files")
+        .well(data-ng-repeat="file in list")
+            ul(data-ng-repeat="val in file")
+                li {{ val }}
+
+            button.btn.btn-danger(data-ng-click="deleteFile(file.name)") Delete
 
 .well(data-ng-show="currentUser")
     h2 Create book
@@ -38,8 +41,10 @@ h1(data-ng-show="currentUser") {{ currentUser.name }}
 
         button.btn.btn-primary(type="submit") Create
 
+h2 List of files
+
 div(data-ng-repeat="book in books")
-    h4 {{ book.name }}
+    h3 {{ book.name }}
     p {{ book.info }}
 
     .well(data-ng-show="currentUser")
