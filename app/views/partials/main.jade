@@ -18,6 +18,13 @@ h1(data-ng-show="currentUser") {{ currentUser.name }}
     button.btn.btn-danger(ng-click="upload.abort()") Cancel
 
 .well(data-ng-show="currentUser")
+    h2 List of files
+
+    ul(data-ng-repeat="file in files")
+        li {{ file[0].name }}
+            button.btn.btn-danger(ng-click="deleteFile(file[0].name)") Delete
+
+.well(data-ng-show="currentUser")
     h2 Create book
 
     form.form(name="form", novalidate, data-ng-submit="createBook()")

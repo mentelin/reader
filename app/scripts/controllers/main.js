@@ -10,7 +10,42 @@ angular.module('mentelinApp')
         console.log('Error: ' + data);
       });
 
-    $scope.createBook = function() {
+    $http.get('/api/books/upload')
+      .success(function (data) {
+        $scope.files = data;
+      })
+      .error(function (data) {
+        console.log('Error: ' + data);
+      });
+
+    $scope.uploadFile = function ($files) {
+      for (var i = 0; i < $files.length; i++) {
+        var file = $files[i];
+
+        $scope.upload = $upload.upload({
+            url: '/api/books/upload',
+            file: file
+          })
+          .progress(function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+          })
+          .success(function (data, status, headers, config) {
+            // console.log(data);
+          });
+      }
+    };
+
+    $scope.deleteFile = function (file) {
+      $http.delete('/books/' + file)
+        .success(function (data) {
+          $scope.books = data;
+        })
+        .error(function (data) {
+          console.log('Error: ' + data);
+        });
+    };
+
+    $scope.createBook = function () {
       $http.post('/api/books', $scope.book)
         .success (function (data) {
           $scope.book = {};
@@ -21,7 +56,7 @@ angular.module('mentelinApp')
         });
     };
 
-    $scope.updateBook = function(id) {
+    $scope.updateBook = function (id) {
       var books = angular.fromJson($scope.books),
           book;
 
@@ -41,24 +76,7 @@ angular.module('mentelinApp')
         });
     };
 
-    $scope.onFileSelect = function($files) {
-      for (var i = 0; i < $files.length; i++) {
-        var file = $files[i];
-
-        $scope.upload = $upload.upload({
-            url: '/api/books/upload',
-            file: file,
-          })
-          .progress(function (evt) {
-            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-          })
-          .success(function (data, status, headers, config) {
-            // console.log(data);
-          });
-      }
-    };
-
-    $scope.deleteBook = function(id) {
+    $scope.deleteBook = function (id) {
       $http.delete('/api/books/' + id)
         .success(function (data) {
           $scope.books = data;
