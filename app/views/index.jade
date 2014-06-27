@@ -6,7 +6,7 @@ html.no-js(lang="ru")
         meta(name="viewport", content="width=device-width, initial-scale=1, minimal-ui")
 
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(http-equiv="cleartype" content="on")
+        meta(http-equiv="cleartype", content="on")
 
         meta(name="google-site-verification", content="9IzBczLunA3sbocGcB98kdaTfC33WNjrC36rTJSwZ7I")
 
@@ -15,7 +15,7 @@ html.no-js(lang="ru")
 
         //- Add to homescreen for Safari on iOS
         meta(name="apple-mobile-web-app-capable", content="yes")
-        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
         meta(name="apple-mobile-web-app-title", content="Mentelin")
 
         //- Tile icon for Win8 (144x144-precomposed.png + tile color HEX)
@@ -77,10 +77,17 @@ html.no-js(lang="ru")
         <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
         <!-- endbower -->
 
+        script(src="bower_components/epub.js/libs/zip/zip.js")
+        script(src="bower_components/epub.js/libs/zip/zip-fs.js")
+        script(src="bower_components/epub.js/libs/zip/zip-ext.js")
+        script(src="bower_components/epub.js/libs/zip/inflate.js")
+        script(src="bower_components/epub.js/libs/zip/mime-types.js")
+        script(src="bower_components/epub.js/libs/fileStorage/fileStorage.js")
         script(src="bower_components/epub.js/build/epub.js")
-        script(src="bower_components/epub.js/build/libs/zip.min.js")
+
         script.
-            EPUBJS.filePath = "bower_components/epub.js/build/libs/";
+            EPUBJS.filePath = "bower_components/epub.js/libs/zip/";
+            fileStorage.filePath = "bower_components/epub.js/libs/fileStorage/workers/";
 
         script(src="scripts/seo.js")
         script(src="scripts/app.js")

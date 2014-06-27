@@ -55,7 +55,7 @@ div(data-ng-repeat="book in books")
     h3 {{ book.name }}
     p {{ book.info }}
     p {{ book.file }}
-    //- p: button.btn.btn-primary(data-ng-click="readBook(book.file)") Read
+    p: button.btn.btn-primary(data-ng-click="readBook(book.file)") Read
 
     .well(data-ng-show="currentUser")
         form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")

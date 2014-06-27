@@ -71,9 +71,9 @@ angular.module('mentelinApp')
     };
 
     $scope.readBook = function (url) {
-      // var Book = ePub(url);
+      var Book = ePub(url);
 
-      // Book.renderTo("epub");
+      Book.renderTo("epub");
     };
 
     $scope.updateBook = function (id) {
