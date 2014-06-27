@@ -30,7 +30,13 @@ angular.module('mentelinApp')
             $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
           })
           .success(function (data, status, headers, config) {
-            // console.log(data);
+            $http.get('/api/upload')
+              .success(function (data) {
+                $scope.files = data;
+              })
+              .error(function (data) {
+                console.log('Error: ' + data);
+              });
           });
       }
     };
@@ -38,7 +44,15 @@ angular.module('mentelinApp')
     $scope.deleteFile = function (file) {
       $http.delete('/books/' + file)
         .success(function (data) {
-          $scope.files = data;
+          $scope.message = data;
+
+          $http.get('/api/upload')
+            .success(function (data) {
+              $scope.files = data;
+            })
+            .error(function (data) {
+              console.log('Error: ' + data);
+            });
         })
         .error(function (data) {
           console.log('Error: ' + data);

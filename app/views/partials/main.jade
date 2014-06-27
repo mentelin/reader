@@ -39,13 +39,20 @@ div(data-ng-show="currentUser")
             label Book info
             textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
 
+        .form-group
+            label Book file
+            select.form-control(name="file", data-ng-repeat="list in files", data-ng-model="book.file")
+                option(value="")
+                option(value="{{ file.url }}", data-ng-repeat="file in list") {{ file.name }}
+
         button.btn.btn-primary(type="submit") Create
 
-h2 List of files
+h2 List of books
 
 div(data-ng-repeat="book in books")
     h3 {{ book.name }}
     p {{ book.info }}
+    p {{ book.file }}
 
     .well(data-ng-show="currentUser")
         form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")
@@ -56,6 +63,12 @@ div(data-ng-repeat="book in books")
             .form-group
                 label Book info
                 textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
+
+            .form-group
+                label Book file
+                select.form-control(name="file", data-ng-repeat="list in files", data-ng-model="book.file")
+                    option(value="")
+                    option(value="{{ file.url }}", data-ng-repeat="file in list") {{ file.name }}
 
             .btn-toolbar
                 button.btn.btn-primary(type="submit") Save changes
