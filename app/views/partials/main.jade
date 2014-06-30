@@ -47,15 +47,13 @@ div(data-ng-show="currentUser")
 
         button.btn.btn-primary(type="submit") Create
 
-#epub
-
 h2 List of books
 
 div(data-ng-repeat="book in books")
     h3 {{ book.name }}
     p {{ book.info }}
     p {{ book.file }}
-    p: button.btn.btn-primary(data-ng-click="readBook(book.file)") Read
+    p: button.btn.btn-primary(data-ng-click="readBook(book)") Read
 
     .well(data-ng-show="currentUser")
         form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")
@@ -76,3 +74,28 @@ div(data-ng-repeat="book in books")
             .btn-toolbar
                 button.btn.btn-primary(type="submit") Save changes
                 button.btn.btn-danger(type="button", data-ng-click="deleteBook(book._id)") Delete book
+
+.modal.fade#modalReader(tabindex="-1", role="dialog", aria-labelledby="modalReaderLabel", aria-hidden="true")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header
+                button.close(type="button", data-dismiss="modal")
+                    span(aria-hidden="true") &times;
+                    span.sr-only Close
+
+                .modal-title#modalReaderLabel
+
+            .modal-body
+                .row
+                    .col-xs-2
+                        button.btn.btn-default(type="button", data-ng-click="prevPage()")
+                            span.fa.fa-angle-left(aria-hidden="true")
+                            span.sr-only Previouse
+
+                    .col-xs-8
+                        .reader-content#readerContent
+
+                    .col-xs-2
+                        button.btn.btn-default(type="button", data-ng-click="nextPage()")
+                            span.fa.fa-angle-right(aria-hidden="true")
+                            span.sr-only Next

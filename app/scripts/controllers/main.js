@@ -2,6 +2,8 @@
 
 angular.module('mentelinApp')
   .controller('MainCtrl', function ($scope, $http, $upload) {
+    var Book;
+
     $http.get('/api/books')
       .success(function (data) {
         $scope.books = data;
@@ -70,10 +72,24 @@ angular.module('mentelinApp')
         });
     };
 
-    $scope.readBook = function (url) {
-      var Book = ePub(url);
+    $scope.readBook = function (book) {
+      Book = ePub(book.file);
 
-      Book.renderTo("epub");
+      $('#readerContent').html('');
+
+      Book.renderTo("readerContent");
+
+      $('#modalReaderLabel').append(book.name);
+
+      $('#modalReader').modal('toggle');
+    };
+
+    $scope.prevPage = function () {
+      Book.prevPage();
+    };
+
+    $scope.nextPage = function () {
+      Book.nextPage();
     };
 
     $scope.updateBook = function (id) {
