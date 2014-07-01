@@ -72,25 +72,25 @@ angular.module('mentelinApp')
         });
     };
 
-    $scope.readBook = function (book) {
-      Book = ePub(book.file);
+    // $scope.readBook = function (book) {
+    //   Book = ePub(book.file);
 
-      $('#readerContent').html('');
+    //   $('#readerContent').html('');
 
-      Book.renderTo("readerContent");
+    //   Book.renderTo("readerContent");
 
-      $('#modalReaderLabel').append(book.name);
+    //   $('#modalReaderLabel').append(book.name);
 
-      $('#modalReader').modal('toggle');
-    };
+    //   $('#modalReader').modal('toggle');
+    // };
 
-    $scope.prevPage = function () {
-      Book.prevPage();
-    };
+    // $scope.prevPage = function () {
+    //   Book.prevPage();
+    // };
 
-    $scope.nextPage = function () {
-      Book.nextPage();
-    };
+    // $scope.nextPage = function () {
+    //   Book.nextPage();
+    // };
 
     $scope.updateBook = function (id) {
       var books = angular.fromJson($scope.books),
