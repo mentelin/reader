@@ -74,7 +74,8 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
           '{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
-          '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.app %>/less/{,*//*}*.less'
         ],
 
         options: {
@@ -91,7 +92,32 @@ module.exports = function (grunt) {
           livereload: true,
           nospawn: true //Without this option specified express won't be reloaded
         }
+      },
+
+      less: {
+        files: '<%= yeoman.app %>/less/{,*/}*.less',
+
+        tasks: 'less:dev',
+
+        options: {
+          livereload: true
+        }
       }
+    },
+
+    less: {
+        dev: {
+            options: {
+                paths: [
+                    '<%= yeoman.app %>/less',
+                    '<%= yeoman.app %>/bower_components'
+                ]
+            },
+
+            files: {
+                '<%= yeoman.app %>/css/theme.css': '<%= yeoman.app %>/less/theme.less'
+            }
+        }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -442,7 +468,8 @@ module.exports = function (grunt) {
         'bower-install',
         'concurrent:server',
         'autoprefixer',
-        'concurrent:debug'
+        'concurrent:debug',
+        'less'
       ]);
     }
 
@@ -498,7 +525,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'less'
   ]);
 
   grunt.registerTask('heroku', function () {
