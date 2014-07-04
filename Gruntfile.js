@@ -213,7 +213,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/public/less/{,*/}*.less',
             '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/public/fonts/*'
+            '<%= yeoman.dist %>/public/fonts/{,*/}*.{eot,ttf,woff,svg}'
           ]
         }
       }
