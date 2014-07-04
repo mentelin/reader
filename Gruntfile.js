@@ -69,8 +69,9 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
-          '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.app %>/less/{,*//*}*.less'
+          '<%= yeoman.app %>/img/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.app %>/less/{,*//*}*.less',
+          '<%= yeoman.dist %>/public/fonts/{,*/}*.{eot,ttf,woff,svg}'
         ],
 
         options: {
@@ -212,7 +213,7 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/public/less/{,*/}*.less',
-            '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yeoman.dist %>/public/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/public/fonts/{,*/}*.{eot,ttf,woff,svg}'
           ]
         }
@@ -241,27 +242,27 @@ module.exports = function (grunt) {
     },
 
     // The following *-min tasks produce minified files in the dist folder
-    imagemin: {
-      options : {
-        cache: false
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/public/images'
-        }]
-      }
-    },
+    // imagemin: {
+    //   options : {
+    //     cache: false
+    //   },
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/img',
+    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
+    //       dest: '<%= yeoman.dist %>/public/img'
+    //     }]
+    //   }
+    // },
 
     svgmin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/img',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/public/images'
+          dest: '<%= yeoman.dist %>/public/img'
         }]
       }
     },
@@ -315,7 +316,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'images/{,*/}*.{webp}',
+            'img/{,*/}*.{webp,png}',
             'fonts/**/*'
           ]
         }, {
@@ -326,8 +327,8 @@ module.exports = function (grunt) {
           src: '**/*.jade'
         }, {
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/public/images',
+          cwd: '.tmp/img',
+          dest: '<%= yeoman.dist %>/public/img',
           src: ['generated/*']
         }, {
           expand: true,
@@ -366,7 +367,7 @@ module.exports = function (grunt) {
       },
       dist: [
         'copy:styles',
-        'imagemin',
+        // 'imagemin',
         'svgmin',
         'htmlmin'
       ]
