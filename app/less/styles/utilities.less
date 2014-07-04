@@ -1,0 +1,138 @@
+.icon-left {
+  margin-right: .5em;
+}
+
+.icon-right {
+  margin-left: .5em;
+}
+
+.icon-middle {
+  margin-right: .5em;
+  margin-left: .5em;
+}
+
+.bg-text {
+  background: @text-color;
+  color: #fff;
+}
+
+.block {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.block-title {
+  margin-top: 0;
+}
+
+.cell-middle {
+  float: none;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cell-content {
+  float: none;
+  display: table-cell;
+}
+
+.col-inline {
+  float: none;
+  display: inline-block;
+  margin-right: -3px;
+  vertical-align: top;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-default {
+  color: @text-color;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-selection {
+  &:hover,
+  &:focus,
+  &:active {
+    color: @link-hover-color;
+  }
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    .text-selection {
+      color: @link-hover-color;
+    }
+
+    .bg-text {
+      background: @link-hover-color;
+    }
+  }
+}
+
+.text-nodecoration {
+  text-decoration: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none !important;
+
+    .text-hover {
+      text-decoration: underline !important;
+    }
+  }
+}
+
+.text-hover {
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline !important;
+  }
+}
+
+.text-underline {
+  text-decoration: underline;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+.text-dashed {
+  border-bottom: 1px dashed;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: 0;
+    text-decoration: none;
+  }
+}
+
+.text-dotted {
+  border-bottom: 1px dotted;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: 0;
+    text-decoration: none;
+  }
+}

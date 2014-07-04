@@ -2,7 +2,7 @@
 
 angular.module('mentelinApp')
   .controller('MainCtrl', function ($scope, $http, $upload) {
-    var Book;
+    var bookObj = {};
 
     $http.get('/api/books')
       .success(function (data) {
@@ -31,6 +31,7 @@ angular.module('mentelinApp')
         reader.onload = (function (file) {
           return function (e) {
             // localStorage[escape(file.name)] = e.target.result;
+            bookObj.file = file.name;
 
             try {
               var zip = new JSZip(e.target.result);
@@ -67,6 +68,17 @@ angular.module('mentelinApp')
                   ncxHref = $(this).attr('href');
                 }
               });
+
+              // console.log($packageXml.find('metadata').find('dtitle').text());
+              // console.log($packageXml.find('metadata').find('creator').text());
+
+              bookObj = {
+                name: $packageXml.find('metadata').find('title').text(),
+                author: $packageXml.find('metadata').find('creator').text()
+              };
+
+              // $('[data-ng-submit="createBook()"]').find('[data-ng-model="book.name"]').val(bookObj.name);
+              // $('[data-ng-submit="createBook()"]').find('[data-ng-model="book.info"]').val(bookObj.author);
 
               // $packageXml.find('manifest').find('item').each(function () {
               //   var media = $(this).attr('media-type');
@@ -156,22 +168,36 @@ angular.module('mentelinApp')
 
         reader.readAsArrayBuffer(file);
 
-        // $scope.upload = $upload.upload({
-        //     url: '/api/upload',
-        //     file: file
-        //   })
-        //   .progress(function (evt) {
-        //     $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
-        //   })
-        //   .success(function (data, status, headers, config) {
-        //     $http.get('/api/upload')
-        //       .success(function (data) {
-        //         $scope.files = data;
-        //       })
-        //       .error(function (data) {
-        //         console.log('Error: ' + data);
-        //       });
-        //   });
+        $scope.upload = $upload.upload({
+            url: '/api/upload',
+            file: file
+          })
+          .progress(function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+          })
+          .success(function (data, status, headers, config) {
+            $http.get('/api/upload')
+              .success(function (data) {
+                $scope.files = data;
+
+                // $('[data-ng-submit="createBook()"]').find('[data-ng-model="book.file"]').find('option').each(function () {
+                //   var file = $(this).text();
+
+                //   // console.log(file);
+
+                //   if (file == bookObj.file) {
+                //     // console.log(file);
+
+                //     $(this).attr('selected', true);
+                //   }
+                // });
+              })
+              .error(function (data) {
+                console.log('Error: ' + data);
+              });
+          });
+
+
       }
     };
 

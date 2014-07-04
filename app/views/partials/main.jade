@@ -1,62 +1,27 @@
-h1(data-ng-show="currentUser") {{ currentUser.name }}
+div(ng-include="'partials/navbar.html'")
 
-.well(data-ng-show="currentUser")
-    h2 Upload book
+.container-fluid
+    .well(data-ng-show="currentUser")
+        h2 Upload book
 
-    form.form(name="form", enctype="multipart/form-data", novalidate)
-        .form-group
-            label Book file
-            input.form-control(type="file", name="file", data-ng-file-select="uploadFile($files)")
+        form.form(name="form", enctype="multipart/form-data", novalidate)
+            .form-group
+                label Book file
+                input.form-control(type="file", name="file", data-ng-file-select="uploadFile($files)")
 
-    .jumbotron(data-ng-file-drop="uploadFile($files)") Drag and Drop
+        .jumbotron(data-ng-file-drop="uploadFile($files)") Drag and Drop
 
-    .progress
-        .progress-bar(role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%;")
-            span {{ progress }}
-            span(data-ng-show="progress") %
+        .progress
+            .progress-bar(role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%;")
+                span {{ progress }}
+                span(data-ng-show="progress") %
 
-    button.btn.btn-danger(ng-click="upload.abort()") Cancel
-
-div(data-ng-show="currentUser")
-    h2 List of files
-
-    div(data-ng-repeat="list in files")
-        .well(data-ng-repeat="file in list")
-            ul(data-ng-repeat="val in file")
-                li {{ val }}
-
-            button.btn.btn-danger(data-ng-click="deleteFile(file.name)") Delete
-
-.well(data-ng-show="currentUser")
-    h2 Create book
-
-    form.form(name="form", novalidate, data-ng-submit="createBook()")
-        .form-group
-            label Book name
-            input.form-control(type="text", name="name", value="{{ book.name }}", data-ng-model="book.name")
-
-        .form-group
-            label Book info
-            textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
-
-        .form-group
-            label Book file
-            select.form-control(name="file", data-ng-repeat="list in files", data-ng-model="book.file")
-                option(value="")
-                option(value="{{ file.url }}", data-ng-repeat="file in list") {{ file.name }}
-
-        button.btn.btn-primary(type="submit") Create
-
-h2 List of books
-
-div(data-ng-repeat="book in books")
-    h3 {{ book.name }}
-    p {{ book.info }}
-    p {{ book.file }}
-    //- p: button.btn.btn-primary(data-ng-click="readBook(book)") Read
+        button.btn.btn-danger(ng-click="upload.abort()") Cancel
 
     .well(data-ng-show="currentUser")
-        form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")
+        h2 Create book
+
+        form.form(name="form", novalidate, data-ng-submit="createBook()")
             .form-group
                 label Book name
                 input.form-control(type="text", name="name", value="{{ book.name }}", data-ng-model="book.name")
@@ -71,31 +36,67 @@ div(data-ng-repeat="book in books")
                     option(value="")
                     option(value="{{ file.url }}", data-ng-repeat="file in list") {{ file.name }}
 
-            .btn-toolbar
-                button.btn.btn-primary(type="submit") Save changes
-                button.btn.btn-danger(type="button", data-ng-click="deleteBook(book._id)") Delete book
+            button.btn.btn-primary(type="submit") Create
 
-.modal.fade#modalReader(tabindex="-1", role="dialog", aria-labelledby="modalReaderLabel", aria-hidden="true")
-    .modal-dialog.modal-lg
-        .modal-content
-            .modal-header
-                button.close(type="button", data-dismiss="modal")
-                    span(aria-hidden="true") &times;
-                    span.sr-only Close
+    div(data-ng-show="currentUser")
+        h2 List of files
 
-                .modal-title#modalReaderLabel
+        div(data-ng-repeat="list in files")
+            .well(data-ng-repeat="file in list")
+                ul(data-ng-repeat="val in file")
+                    li {{ val }}
 
-            .modal-body
-                .row
-                    .col-xs-2
-                        button.btn.btn-default(type="button", data-ng-click="prevPage()")
-                            span.fa.fa-angle-left(aria-hidden="true")
-                            span.sr-only Previouse
+                button.btn.btn-danger(data-ng-click="deleteFile(file.name)") Delete
 
-                    .col-xs-8
-                        .reader-content#readerContent
+    h2 List of books
 
-                    .col-xs-2
-                        button.btn.btn-default(type="button", data-ng-click="nextPage()")
-                            span.fa.fa-angle-right(aria-hidden="true")
-                            span.sr-only Next
+    div(data-ng-repeat="book in books")
+        h3 {{ book.name }}
+        p {{ book.info }}
+        p {{ book.file }}
+        //- p: button.btn.btn-primary(data-ng-click="readBook(book)") Read
+
+        .well(data-ng-show="currentUser")
+            form.form(name="form", novalidate, data-ng-submit="updateBook(book._id)")
+                .form-group
+                    label Book name
+                    input.form-control(type="text", name="name", value="{{ book.name }}", data-ng-model="book.name")
+
+                .form-group
+                    label Book info
+                    textarea.form-control(name="info", value="{{ book.info }}", data-ng-model="book.info")
+
+                .form-group
+                    label Book file
+                    select.form-control(name="file", data-ng-repeat="list in files", data-ng-model="book.file")
+                        option(value="")
+                        option(value="{{ file.url }}", data-ng-repeat="file in list") {{ file.name }}
+
+                .btn-toolbar
+                    button.btn.btn-primary(type="submit") Save changes
+                    button.btn.btn-danger(type="button", data-ng-click="deleteBook(book._id)") Delete book
+
+    .modal.fade#modalReader(tabindex="-1", role="dialog", aria-labelledby="modalReaderLabel", aria-hidden="true")
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal")
+                        span(aria-hidden="true") &times;
+                        span.sr-only Close
+
+                    .modal-title#modalReaderLabel
+
+                .modal-body
+                    .row
+                        .col-xs-2
+                            button.btn.btn-default(type="button", data-ng-click="prevPage()")
+                                span.fa.fa-angle-left(aria-hidden="true")
+                                span.sr-only Previouse
+
+                        .col-xs-8
+                            .reader-content#readerContent
+
+                        .col-xs-2
+                            button.btn.btn-default(type="button", data-ng-click="nextPage()")
+                                span.fa.fa-angle-right(aria-hidden="true")
+                                span.sr-only Next

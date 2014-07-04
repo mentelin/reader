@@ -1,15 +1,37 @@
-.header(ng-controller="NavbarCtrl")
-    ul.nav.nav-pills.pull-right
-        li(ng-repeat="item in menu", ng-class="{ active: isActive(item.link) }")
-            a(ng-href="{{ item.link }}") {{ item.title }}
+header.navbar.navbar-default.navbar-static-top.navbar-container-border(role="navigation", data-ng-controller="NavbarCtrl")
+    .container-fluid
+        .navbar-header
+            button.navbar-toggle(type="button", data-toggle="collapse", data-target=".navbar-collapse")
+                span.sr-only Меню
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
 
-        li(ng-hide="currentUser", ng-class="{ active: isActive('/login') }")
-            a(href="/login") Login
+            a.navbar-brand(href="/", title="Mentelin")
+                img.logo(src="/img/logo.svg", alt="Mentelin")
 
-        li(ng-hide="currentUser", ng-class="{ active: isActive('/signup') }")
-            a(href="/signup") Sign up
+        nav.navbar-collapse.collapse
+            h1.sr-only Меню
 
-        li(ng-show="currentUser", ng-class="{ active: isActive('/logout') }")
-            a(href="", ng-click="logout()") Logout
+            ul.nav.nav-links.navbar-nav.navbar-right
+                li
+                    a(href="#", title="Библиотека") Библиотека
 
-    h3.text-muted mentelin
+                li
+                    a(href="#", title="Поиск")
+                        span.fa.fa-search.small.icon-search
+                        span Поиск
+
+                li(ng-show="currentUser", ng-class="{ active: isActive('/settings') }")
+                    a(href="/settings", title="{{ currentUser.name }}")
+                        img.navbar-user-img.icon-left(src="", alt="{{ currentUser.name }}")
+                        span {{ currentUser.name }}
+
+                li(ng-show="currentUser", ng-class="{ active: isActive('/logout') }")
+                    a(href="#", title="Выход", data-ng-click="logout()") Выход
+
+                li(ng-hide="currentUser", ng-class="{ active: isActive('/login') }")
+                    a(href="/login", title="Вход") Вход
+
+                li(ng-hide="currentUser", ng-class="{ active: isActive('/signup') }")
+                    a(href="/signup", title="Регистрация") Регистрация

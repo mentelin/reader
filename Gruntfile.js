@@ -62,17 +62,12 @@ module.exports = function (grunt) {
         files: ['test/client/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
-      },
       gruntfile: {
         files: ['Gruntfile.js']
       },
       livereload: {
         files: [
           '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
           '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.app %>/less/{,*//*}*.less'
@@ -109,8 +104,7 @@ module.exports = function (grunt) {
         dev: {
             options: {
                 paths: [
-                    '<%= yeoman.app %>/less',
-                    '<%= yeoman.app %>/bower_components'
+                    '<%= yeoman.app %>/less'
                 ]
             },
 
@@ -169,21 +163,6 @@ module.exports = function (grunt) {
       server: '.tmp'
     },
 
-    // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 1 version']
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      }
-    },
-
     // Debugging with node inspector
     'node-inspector': {
       custom: {
@@ -232,9 +211,9 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/public/styles/{,*/}*.css',
+            '<%= yeoman.dist %>/public/less/{,*/}*.less',
             '<%= yeoman.dist %>/public/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/public/styles/fonts/*'
+            '<%= yeoman.dist %>/public/fonts/*'
           ]
         }
       }
@@ -255,7 +234,7 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= yeoman.dist %>/views/{,*/}*.html',
              '<%= yeoman.dist %>/views/{,*/}*.jade'],
-      css: ['<%= yeoman.dist %>/public/styles/{,*/}*.css'],
+      css: ['<%= yeoman.dist %>/public/css/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>/public']
       }
@@ -362,8 +341,8 @@ module.exports = function (grunt) {
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
+        cwd: '<%= yeoman.app %>/css',
+        dest: '.tmp/css/',
         src: '{,*/}*.css'
       }
     },
@@ -467,7 +446,6 @@ module.exports = function (grunt) {
         'clean:server',
         'bower-install',
         'concurrent:server',
-        'autoprefixer',
         'concurrent:debug',
         'less'
       ]);
@@ -477,7 +455,6 @@ module.exports = function (grunt) {
       'clean:server',
       'bower-install',
       'concurrent:server',
-      'autoprefixer',
       'express:dev',
       'open',
       'watch'
@@ -501,7 +478,6 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'concurrent:test',
-        'autoprefixer',
         'karma'
       ]);
     }
@@ -517,7 +493,6 @@ module.exports = function (grunt) {
     'bower-install',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
     'concat',
     'ngmin',
     'copy:dist',
