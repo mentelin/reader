@@ -69,6 +69,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
+          '{.tmp,<%= yeoman.app %>}/css/{,*//*}*.css',
           '<%= yeoman.app %>/img/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.app %>/less/{,*//*}*.less',
           '<%= yeoman.dist %>/public/fonts/{,*/}*.{eot,ttf,woff,svg}'
@@ -94,6 +95,16 @@ module.exports = function (grunt) {
         files: '<%= yeoman.app %>/less/{,*/}*.less',
 
         tasks: 'less:dev',
+
+        options: {
+          livereload: true
+        }
+      },
+
+      css: {
+        files: '<%= yeoman.app %>/css/{,*/}*.css',
+
+        tasks: 'copy:styles',
 
         options: {
           livereload: true
@@ -212,9 +223,7 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= yeoman.dist %>/public/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/public/less/{,*/}*.less',
-            '<%= yeoman.dist %>/public/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/public/fonts/{,*/}*.{eot,ttf,woff,svg}'
+            '<%= yeoman.dist %>/public/css/{,*/}*.css'
           ]
         }
       }

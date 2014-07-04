@@ -7890,15 +7890,17 @@ body {
 .navbar-container-border .navbar-form {
   border-top-width: 3px;
 }
-.navbar-nav.navbar-right:last-child {
-  margin-right: 0;
-}
-.navbar-nav.navbar-right:last-child > li {
-  margin-top: 10px;
-  margin-left: 15px;
-}
-.navbar-nav.navbar-right:last-child > li > a {
-  padding: 0;
+@media (min-width: 768px) {
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+  }
+  .navbar-nav.navbar-right:last-child > li {
+    margin-top: 10px;
+    margin-left: 40px;
+  }
+  .navbar-nav.navbar-right:last-child > li > a {
+    padding: 0;
+  }
 }
 .logo {
   display: block;

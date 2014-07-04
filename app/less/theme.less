@@ -65,15 +65,17 @@ body {
   }
 }
 
-.navbar-nav.navbar-right:last-child {
-  margin-right: 0;
+@media (min-width: @screen-sm) {
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
 
-  > li {
-    margin-top: @navbar-padding-vertical;
-    margin-left: @navbar-padding-horizontal;
+    > li {
+      margin-top: @navbar-padding-vertical;
+      margin-left: 40px;
 
-    > a {
-      padding: 0;
+      > a {
+        padding: 0;
+      }
     }
   }
 }

@@ -15,23 +15,32 @@ header.navbar.navbar-default.navbar-static-top.navbar-container-border(role="nav
 
             ul.nav.nav-links.navbar-nav.navbar-right
                 li
-                    a(href="#", title="Библиотека") Библиотека
+                    a.text-hover(href="#", title="Библиотека")
+                        span.fa.fa-book.icon-left
+                        span Библиотека
 
                 li
-                    a(href="#", title="Поиск")
+                    a.text-hover(href="#", title="Поиск")
                         span.fa.fa-search.small.icon-search
                         span Поиск
 
                 li(ng-show="currentUser", ng-class="{ active: isActive('/settings') }")
-                    a(href="/settings", title="{{ currentUser.name }}")
-                        img.navbar-user-img.icon-left(src="", alt="{{ currentUser.name }}")
+                    a.text-hover(href="/settings", title="{{ currentUser.name }}")
+                        //- img.navbar-user-img.icon-left(src="", alt="{{ currentUser.name }}")
+                        span.fa.fa-user.icon-left
                         span {{ currentUser.name }}
 
                 li(ng-show="currentUser", ng-class="{ active: isActive('/logout') }")
-                    a(href="#", title="Выход", data-ng-click="logout()") Выход
+                    a.text-hover(href="#", title="Выход", data-ng-click="logout()")
+                        span.fa.fa-sign-out.icon-left
+                        span Выход
 
                 li(ng-hide="currentUser", ng-class="{ active: isActive('/login') }")
-                    a(href="/login", title="Вход") Вход
+                    a.text-hover(href="/login", title="Вход")
+                        span.fa.fa-sign-in.icon-left
+                        span Вход
 
                 li(ng-hide="currentUser", ng-class="{ active: isActive('/signup') }")
-                    a(href="/signup", title="Регистрация") Регистрация
+                    a.text-hover(href="/signup", title="Регистрация")
+                        span.fa.fa-user.icon-left
+                        span Регистрация
