@@ -1,0 +1,12 @@
+.container-fluid
+    .well
+        h2 Upload book
+
+        form(name="form", enctype="multipart/form-data", novalidate)
+            .form-group
+                label Book file
+                input.form-control(type="file", name="file", data-ng-file-select="readFile($files)")
+
+            .jumbotron(data-ng-file-drop="readFile($files)") Drag and Drop
+
+    .reader-content#readerContent

@@ -26,6 +26,14 @@ angular.module('mentelinApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+      .when('/reader', {
+        templateUrl: 'partials/reader',
+        controller: 'ReaderCtrl'
+      })
+      .when('/reader/:id', {
+        templateUrl: 'partials/reader',
+        controller: 'ReaderCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
