@@ -1,6 +1,6 @@
 .container-fluid
     .well
-        h2 Upload book
+        h2 Upload and read book
 
         form(name="form", enctype="multipart/form-data", novalidate)
             .form-group
@@ -9,4 +9,7 @@
 
             .jumbotron(data-ng-file-drop="readFile($files)") Drag and Drop
 
-    .reader-content#readerContent
+    pre.hidden#readerContentHide
+
+    .embed-responsive.embed-responsive-4by3
+        iframe.embed-responsive-item#readerContent

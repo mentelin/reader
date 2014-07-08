@@ -42,7 +42,7 @@ angular.module('mentelinApp')
                   cssHref;
 
               // console.log(fullPath);
-              console.log(packageXml);
+              // console.log(packageXml);
               // console.log(mainFolder);
 
               $packageXml.find('manifest').find('item').each(function () {
@@ -67,21 +67,19 @@ angular.module('mentelinApp')
               // $('[data-ng-submit="createBook()"]').find('[data-ng-model="book.name"]').val(bookObj.name);
               // $('[data-ng-submit="createBook()"]').find('[data-ng-model="book.info"]').val(bookObj.author);
 
-              // $packageXml.find('manifest').find('item').each(function () {
-              //   var media = $(this).attr('media-type');
+              $packageXml.find('manifest').find('item').each(function () {
+                var media = $(this).attr('media-type');
 
-              //   if (media === 'text/css') {
-              //     console.log($(this).attr('href'));
+                if (media === 'text/css') {
+                  // console.log($(this).attr('href'));
 
-              //     cssHref = $(this).attr('href');
-              //   }
-              // });
+                  cssHref = $(this).attr('href');
+                }
+              });
 
-              // var cssFile = zip.folder(mainFolder).file(cssHref).asText();
+              var cssFile = zip.folder(mainFolder).file(cssHref).asText();
 
               // console.log(cssFile);
-
-              // $('style').text(cssFile) .appendTo('head');
 
               var tocFile = zip.folder(mainFolder).file(ncxHref).asText(),
                   tocXml = $.parseXML(tocFile),
@@ -98,7 +96,11 @@ angular.module('mentelinApp')
                 navPoints.push(src);
               });
 
-              $('#readerContent').html('');
+              $('#readerContentHide').html('');
+
+              var iframe = document.getElementById('readerContent');
+
+              iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
 
               for (var i = 0; i < navPoints.length; i++) {
                 var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
@@ -109,10 +111,10 @@ angular.module('mentelinApp')
                 // console.log(navPointXml);
                 // console.log(chapter);
 
-                $('#readerContent').append(chapter);
+                $('#readerContentHide').append(chapter);
               }
 
-              $('#readerContent').find('img').each(function () {
+              $('#readerContentHide').find('img').each(function () {
                 if (this.length !== 0) {
                   var src = $(this).attr('src');
 
@@ -145,10 +147,14 @@ angular.module('mentelinApp')
                 }
               });
 
-              $('#modalReader').modal('toggle');
+              var bookContent = $('#readerContentHide').html();
+
+              iframe.document.write(bookContent);
+
+              $(iframe.document).find('head').append('<style>' + cssFile + '</style>');
             }
             catch (e) {
-              console.log('Error reading ' + file.name + ': ' + e.message);
+              console.log(e.message);
             }
           });
       })
@@ -191,7 +197,7 @@ angular.module('mentelinApp')
                   cssHref;
 
               // console.log(fullPath);
-              console.log(packageXml);
+              // console.log(packageXml);
               // console.log(mainFolder);
 
               $packageXml.find('manifest').find('item').each(function () {
@@ -247,7 +253,11 @@ angular.module('mentelinApp')
                 navPoints.push(src);
               });
 
-              $('#readerContent').html('');
+              $('#readerContentHide').html('');
+
+              var iframe = document.getElementById('readerContent');
+
+              iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
 
               for (var i = 0; i < navPoints.length; i++) {
                 var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
@@ -258,10 +268,10 @@ angular.module('mentelinApp')
                 // console.log(navPointXml);
                 // console.log(chapter);
 
-                $('#readerContent').append(chapter);
+                $('#readerContentHide').append(chapter);
               }
 
-              $('#readerContent').find('img').each(function () {
+              $('#readerContentHide').find('img').each(function () {
                 if (this.length !== 0) {
                   var src = $(this).attr('src');
 
@@ -293,6 +303,12 @@ angular.module('mentelinApp')
                   }
                 }
               });
+
+              var bookContent = $('#readerContentHide').html();
+
+              iframe.document.write(bookContent);
+
+              $(iframe.document).find('head').append('<style>' + cssFile + '</style>');
             }
             catch (e) {
               console.log('Error reading ' + file.name + ': ' + e.message);
