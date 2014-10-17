@@ -96,11 +96,12 @@ angular.module('mentelinApp')
                 navPoints.push(src);
               });
 
-              $('#readerContentHide').html('');
+              $('#readerContent').html('');
+              // $('#readerContentHide').html('');
 
-              var iframe = document.getElementById('readerContent');
+              // var iframe = document.getElementById('readerContent');
 
-              iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+              // iframe = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
 
               for (var i = 0; i < navPoints.length; i++) {
                 var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
@@ -111,10 +112,12 @@ angular.module('mentelinApp')
                 // console.log(navPointXml);
                 // console.log(chapter);
 
-                $('#readerContentHide').append(chapter);
+                $('#readerContent').append(chapter);
+                // $('#readerContentHide').append(chapter);
               }
 
-              $('#readerContentHide').find('img').each(function () {
+              $('#readerContent').find('img').each(function () {
+              // $('#readerContentHide').find('img').each(function () {
                 if (this.length !== 0) {
                   var src = $(this).attr('src');
 
@@ -147,11 +150,11 @@ angular.module('mentelinApp')
                 }
               });
 
-              var bookContent = $('#readerContentHide').html();
+              // var bookContent = $('#readerContentHide').html();
 
-              iframe.document.write(bookContent);
+              // iframe.document.write(bookContent);
 
-              $(iframe.document).find('head').append('<style>' + cssFile + '</style>');
+              // $(iframe.document).find('head').append('<style>' + cssFile + '</style>');
             }
             catch (e) {
               console.log(e.message);
