@@ -1,9 +1,7 @@
 node_modules
 public
 .tmp
-.sass-cache
-app/bower_components
-heroku
-/views
+.idea
+client/bower_components
 dist
-books
+/server/config/local.env.js
