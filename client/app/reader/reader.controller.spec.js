@@ -16,6 +16,6 @@ describe('Controller: ReaderCtrl', function () {
   }));
 
   it('should ...', function () {
-    expect(1).toEqual(1);
+    // expect(1).toEqual(1);
   });
 });
