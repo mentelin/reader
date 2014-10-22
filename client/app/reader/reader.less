@@ -1,0 +1,67 @@
+.block-drag-and-drop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: table;
+  .square(100%);
+  margin: 0;
+  background: @brand-primary;
+
+  &.dragover {
+    .block-drag-and-drop-inner {
+      text-shadow: -1px -1px 0px lighten(@brand-primary, 10%),
+                   -2px -2px 0px lighten(@brand-primary, 10%),
+                   -3px -3px 0px lighten(@brand-primary, 10%),
+                   -3px -3px 0px lighten(@brand-primary, 10%),
+                   -4px -4px 0px lighten(@brand-primary, 10%),
+                   -5px -5px 0px lighten(@brand-primary, 10%),
+                   -6px -6px 0px lighten(@brand-primary, 10%);
+    }
+  }
+
+  &.reading {
+    position: static;
+    display: block;
+    height: 60px;
+    padding-top: 5px;
+    overflow: hidden;
+    .transition(height ease 1s);
+
+    .block-drag-and-drop-inner {
+      display: block;
+    }
+  }
+}
+
+.block-drag-and-drop-inner {
+  display: table-cell;
+  vertical-align: middle;
+  color: lighten(@brand-primary, 30%);
+  font-size: @font-size-h1;
+  letter-spacing: 2px;
+  text-align: center;
+  text-shadow: 1px 1px 0px lighten(@brand-primary, 10%),
+               2px 2px 0px lighten(@brand-primary, 10%),
+               3px 3px 0px lighten(@brand-primary, 10%),
+               3px 3px 0px lighten(@brand-primary, 10%),
+               4px 4px 0px lighten(@brand-primary, 10%),
+               5px 5px 0px lighten(@brand-primary, 10%),
+               6px 6px 0px lighten(@brand-primary, 10%);
+  .transition(all ease .3s);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: lighten(@brand-primary, 40%);
+  }
+}
+
+.reader-wrapper {
+  overflow: hidden;
+}
+
+.reader-content {
+  position: relative;
+}

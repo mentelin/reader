@@ -1,12 +1,25 @@
+form(name="form", enctype="multipart/form-data", role="form")
+    label.block-drag-and-drop(for="upload", data-ng-file-drop="readFile($files)")
+        span.block-drag-and-drop-inner
+            span.fa.fa-arrow-down
+            br
+            span Drag and Drop
+            br
+            span or
+            br
+            span Click to upload the book
+
+    input.hidden#upload(type="file", name="file", data-ng-file-select="readFile($files)")
+
 .container-fluid
-    .well
-        h2 Upload and read book
+    .row
+        .col-xs-1
+            a(href="#", data-ng-click="prevPage()")
+                span.fa.fa-arrow-left
 
-        form(name="form", enctype="multipart/form-data", novalidate)
-            .form-group
-                label Book file
-                input.form-control(type="file", name="file", data-ng-file-select="readFile($files)")
+        .col-xs-10.reader-wrapper
+            .reader-content#readerContent
 
-            .jumbotron(data-ng-file-drop="readFile($files)") Drag and Drop
-
-    #readerContent
+        .col-xs-1.text-right
+            a(href="#", data-ng-click="nextPage()")
+                span.fa.fa-arrow-right
