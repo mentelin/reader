@@ -155,6 +155,30 @@ angular.module('readerApp')
         };
       };
 
+      var checkState = setInterval(function () {
+        console.log(reader.readyState);
+
+        if (reader.readyState === 2) {
+          if (!($('.block-drag-and-drop').hasClass('reading'))) {
+            $('.block-drag-and-drop').addClass('reading');
+          }
+
+          var windowHeight = $(window).outerHeight() - $('.block-drag-and-drop').outerHeight(),
+              readerHeight = $('#readerContent').outerHeight(),
+              readerWrapperWidth = $('.reader-wrapper').outerWidth(),
+              columnCount = Math.round(readerHeight / windowHeight),
+              readerWidth = readerWrapperWidth * columnCount;
+
+          console.log(windowHeight, readerHeight);
+
+          $('#readerContent').attr('style',
+            'width: ' + readerWidth + 'px;' + '-webkit-column-count: ' + columnCount + ';' + '-moz-column-count: ' + columnCount + ';' + 'column-count: ' + columnCount + ';'
+          );
+
+          clearInterval(checkState);
+        }
+      }, 1000);
+
       for (var i = 0; i < $files.length; i++) {
         var file = $files[i],
             JSZip = window.JSZip;
@@ -170,32 +194,7 @@ angular.module('readerApp')
         console.log(reader.readyState);
 
         if (reader.readyState === 1) {
-          var checkState = setInterval(function () {
-            console.log(reader.readyState);
-
-            if (reader.readyState === 2) {
-              if (!($('.block-drag-and-drop').hasClass('reading'))) {
-                $('.block-drag-and-drop').addClass('reading');
-              }
-
-              var windowHeight = $(window).outerHeight() - $('.block-drag-and-drop').outerHeight(),
-                  readerHeight = $('#readerContent').outerHeight(),
-                  readerWrapperWidth = $('.reader-wrapper').outerWidth(),
-                  columnCount = Math.round(readerHeight / windowHeight),
-                  readerWidth = readerWrapperWidth * columnCount;
-
-              console.log(windowHeight, readerHeight);
-
-              $('#readerContent').attr('style',
-                'width: ' + readerWidth + 'px;'
-                + '-webkit-column-count: ' + columnCount + ';'
-                + '-moz-column-count: ' + columnCount + ';'
-                + 'column-count: ' + columnCount + ';'
-              );
-
-              clearInterval(checkState);
-            }
-          }, 1000);
+          checkState();
         }
       }
     };
@@ -214,7 +213,7 @@ angular.module('readerApp')
         left = - width;
       }
 
-      console.log(left)
+      console.log(left);
 
       $('#readerContent').css({
         left: left
@@ -237,7 +236,7 @@ angular.module('readerApp')
         }
       }
 
-      console.log(left)
+      console.log(left);
 
       $('#readerContent').css({
         left: left
