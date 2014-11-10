@@ -1,4 +1,4 @@
-.navbar.navbar-fixed-top.navbar-inverse(role="navigation")
+.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
     .container-fluid
         .navbar-header
             button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#collapseNavbarReader")
@@ -13,7 +13,6 @@
             p.navbar-text Ф. М. Достоевский «Идиот»
 
         .collapse.navbar-collapse#collapseNavbarReader
-
             ul.nav.navbar-nav.navbar-right.navbar-btns
                 li
                     a(href="#", title="Bookmark")
@@ -53,7 +52,11 @@
 
                         span.hidden-sm.hidden-md.hidden-lg.icon-right Close
 
-a.btn.btn-default.reader-btn-page(href="#", title="Previous", data-ng-click="pagePrev()")
+.navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
+    .container-fluid
+        .navbar-text {{ currentPage }} of {{ pages }}
+
+a.btn.btn-default.reader-btn-page.reader-btn-page-prev(href="#", title="Previous", data-ng-click="pagePrev()")
     span.fa.fa-chevron-left
 
 a.btn.btn-default.reader-btn-page.reader-btn-page-next(href="#", title="Next", data-ng-click="pageNext()")
