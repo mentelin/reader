@@ -2,13 +2,13 @@
 
 angular.module('readerApp')
   .controller('MainCtrl', function ($scope) {
+    $scope.readerWrapperWidth = 0;
     $scope.readerWidth = 0;
-    $scope.width = 0;
     $scope.activePage = 0;
 
     $scope.pagePrev = function () {
       if ($scope.activePage !== 0) {
-        var left = $scope.activePage + $scope.readerWidth;
+        var left = $scope.activePage + $scope.readerWrapperWidth;
 
         $scope.activePage = left;
 
@@ -19,12 +19,12 @@ angular.module('readerApp')
     };
 
     $scope.pageNext = function () {
-      var left = $scope.activePage - $scope.readerWidth;
+      var left = $scope.activePage - $scope.readerWrapperWidth;
 
-      if (-left < $scope.width) {
+      if (-left < $scope.readerWidth) {
         $scope.activePage = left;
 
-        $('#readerContent').css({
+        $('#reader').css({
           marginLeft: left
         });
       }
@@ -32,29 +32,50 @@ angular.module('readerApp')
 
     $scope.bookLayout = function () {
       var height = $(window).outerHeight(),
-          $reader = $('#readerContent'),
-          $readerWrapper = $('#readerContentWrapper');
+          $reader = $('#reader'),
+          $readerWrapper = $('#readerWrapper');
+
+      $reader.removeAttr('style').hide();
 
       $readerWrapper.css({
         top: height * 0.11
       });
 
       var windowHeight = $(window).outerHeight() - $(window).outerHeight() * 0.11 - $(window).outerHeight() * 0.22,
-          readerHeight = $reader.height(),
-          columnCount = Math.ceil(readerHeight / windowHeight),
-          readerWidth = $readerWrapper.outerWidth(),
-          width = readerWidth * columnCount;
+          readerHeight = $reader.outerHeight(),
+          column = Math.ceil(readerHeight / windowHeight),
+          readerWrapperWidth = $readerWrapper.outerWidth(),
+          readerWrapperHeight = $readerWrapper.outerHeight(),
+          readerWidth = readerWrapperWidth * column;
 
-      $scope.readerWidth = readerWidth;
-      $scope.width = width;
+      $scope.readerWrapperWidth = readerWrapperWidth;
 
       $reader.attr('style',
-        'width: ' + width + 'px;' +
-        '-webkit-column-count: ' + columnCount + ';' +
-        '-moz-column-count: ' + columnCount + ';' +
-        'column-count: ' + columnCount + ';' +
-        'margin-left: ' + $scope.activePage + ';'
+        'width: ' + readerWidth + 'px;' +
+        '-webkit-column-count: ' + column + ';' +
+        '-moz-column-count: ' + column + ';' +
+        'column-count: ' + column + ';'
       );
+
+      readerHeight = $reader.outerHeight();
+      readerWrapperHeight = $readerWrapper.outerHeight();
+
+      var line = parseInt($reader.css('line-height')),
+          readerLines = Math.ceil(readerHeight / line),
+          readerWrapperLines = Math.round(readerWrapperHeight / line),
+          lines = ((readerLines - readerWrapperLines) * column);
+
+      column += Math.ceil(lines / readerLines);
+      readerWidth = readerWrapperWidth * column;
+      $scope.readerWidth = readerWidth;
+
+      $reader.attr('style',
+        'width: ' + readerWidth + 'px;' +
+        '-webkit-column-count: ' + column + ';' +
+        '-moz-column-count: ' + column + ';' +
+        'column-count: ' + column + ';'
+      ).show();
+
     };
 
     $(function () {
@@ -62,9 +83,6 @@ angular.module('readerApp')
     });
 
     $(window).resize(function () {
-      $scope.activePage = 0;
-      $('#readerContent').removeAttr('style');
-
       $scope.bookLayout();
     });
   });
