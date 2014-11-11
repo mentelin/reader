@@ -31,7 +31,7 @@
                         li Item
                         li Item
 
-                li.dropdown(data-not-close, data-on-toggle="toggled(open)")
+                li.dropdown(data-on-toggle="toggled(open)")
                     a.dropdown-toggle(href="#", title="Settings")
                         span.fa.fa-cog
 
@@ -45,8 +45,29 @@
                                 option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
 
                         li Size
-                        li Align
-                        li Columns
+
+                        li
+                            p Align
+
+                            p.btn-group
+                                label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'left'")
+                                    span.fa.fa-align-left
+
+                                label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'justify'")
+                                    span.fa.fa-align-justify
+
+                        li
+                            p Columns
+
+                            p.btn-group
+                                label.btn.btn-default(data-ng-model="columns", data-btn-radio="1")
+                                    span.fa.fa-align-justify
+
+                                label.btn.btn-default(data-ng-model="columns", data-btn-radio="2")
+                                    span.fa.fa-align-justify.icon-left
+
+                                    span.fa.fa-align-justify
+
                         li Theme
 
                 li

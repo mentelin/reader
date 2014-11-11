@@ -9,6 +9,9 @@ angular.module('readerApp')
     $scope.currentPage = 1;
     $scope.fonts = [];
     $scope.font = '';
+    $scope.textAlign = 'left';
+    $scope.columns = 1;
+    $scope.readerWrapperOffset = 0;
 
     var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
 
@@ -18,6 +21,10 @@ angular.module('readerApp')
 
     $scope.pagePrev = function () {
       var left = $scope.activePage + $scope.readerWrapperWidth;
+
+      // if ($scope.columns === 2) {
+      //   left += $scope.readerWrapperOffset;
+      // }
 
       if (left <= 0) {
         $scope.activePage = left;
@@ -32,6 +39,10 @@ angular.module('readerApp')
 
     $scope.pageNext = function () {
       var left = $scope.activePage - $scope.readerWrapperWidth;
+
+      // if ($scope.columns === 2) {
+      //   left -= $scope.readerWrapperOffset;
+      // }
 
       if (-left < $scope.readerWidth) {
         $scope.activePage = left;
@@ -57,17 +68,25 @@ angular.module('readerApp')
           column = Math.ceil(readerHeight / windowHeight),
           readerWrapperWidth = $readerWrapper.outerWidth(),
           readerWrapperHeight = $readerWrapper.outerHeight(),
-          readerWidth = readerWrapperWidth * column;
+          readerWidth = readerWrapperWidth * column,
+          readerWrapperOffset = $readerWrapper.offset().left,
+          style = 'width: ' + readerWidth + 'px;' +
+            '-webkit-column-count: ' + $scope.columns * column + ';' +
+            '-moz-column-count: ' + $scope.columns * column + ';' +
+            'column-count: ' + $scope.columns * column + ';' +
+            'font-family: ' + $scope.font + ';' +
+            'text-align: ' + $scope.textAlign + ';';
 
       $scope.readerWrapperWidth = readerWrapperWidth;
+      $scope.readerWrapperOffset = readerWrapperOffset;
 
-      $reader.attr('style',
-        'width: ' + readerWidth + 'px;' +
-        '-webkit-column-count: ' + column + ';' +
-        '-moz-column-count: ' + column + ';' +
-        'column-count: ' + column + ';' +
-        'font-family: ' + $scope.font + ';'
-      );
+      if ($scope.columns === 2) {
+        style += '-webkit-column-gap: ' + readerWrapperOffset + 'px;' +
+          '-moz-column-gap: ' + readerWrapperOffset + 'px;' +
+          'column-gap: ' + readerWrapperOffset + 'px;';
+      }
+
+      $reader.attr('style', style);
 
       readerHeight = $reader.outerHeight();
       readerWrapperHeight = $readerWrapper.outerHeight();
@@ -83,13 +102,20 @@ angular.module('readerApp')
         $scope.readerWidth = readerWidth;
         $scope.pages = column;
 
-        $reader.attr('style',
-          'width: ' + readerWidth + 'px;' +
-          '-webkit-column-count: ' + column + ';' +
-          '-moz-column-count: ' + column + ';' +
-          'column-count: ' + column + ';' +
-          'font-family: ' + $scope.font + ';'
-        ).show();
+        style = 'width: ' + readerWidth + 'px;' +
+          '-webkit-column-count: ' + $scope.columns * column + ';' +
+          '-moz-column-count: ' + $scope.columns * column + ';' +
+          'column-count: ' + $scope.columns * column + ';' +
+          'font-family: ' + $scope.font + ';' +
+          'text-align: ' + $scope.textAlign + ';';
+
+        if ($scope.columns === 2) {
+          style += '-webkit-column-gap: ' + readerWrapperOffset + 'px;' +
+            '-moz-column-gap: ' + readerWrapperOffset + 'px;' +
+            'column-gap: ' + readerWrapperOffset + 'px;';
+        }
+
+        $reader.attr('style', style).show();
       }
     };
 
@@ -103,6 +129,16 @@ angular.module('readerApp')
 
         $scope.bookLayout();
       }
+    });
+
+    $scope.$watch('textAlign', function () {
+      $('#reader').css({
+        textAlign: $scope.textAlign
+      });
+    });
+
+    $scope.$watch('columns', function () {
+      $scope.bookLayout();
     });
 
     $(function () {
