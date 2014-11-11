@@ -1,5 +1,9 @@
 'use strict';
 
+$(function () {
+  $(document).svgmagic();
+});
+
 angular.module('readerApp', [
   'ngCookies',
   'ngResource',

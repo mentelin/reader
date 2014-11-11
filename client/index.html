@@ -38,6 +38,16 @@
 
       ga('create', 'UA-XXXXX-X');
       ga('send', 'pageview');
+
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                  '://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
     </script>
 
     <!--[if lt IE 9]>
@@ -69,11 +79,6 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
-        <script>
-          $(document).ready(function () {
-            $(document).svgmagic();
-          });
-        </script>
         <script src="app/app.js"></script>
           <!-- injector:js -->
           <script src="app/account/account.js"></script>

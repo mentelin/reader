@@ -1,12 +1,20 @@
 'use strict';
 
 angular.module('readerApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $http) {
     $scope.readerWrapperWidth = 0;
     $scope.readerWidth = 0;
     $scope.activePage = 0;
     $scope.pages = 1;
     $scope.currentPage = 1;
+    $scope.fonts = [];
+    $scope.font = '';
+
+    var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
+
+    $http.get('https://www.googleapis.com/webfonts/v1/webfonts?key=' + key).success(function (fonts) {
+      $scope.fonts = fonts;
+    });
 
     $scope.pagePrev = function () {
       var left = $scope.activePage + $scope.readerWrapperWidth;
@@ -57,7 +65,8 @@ angular.module('readerApp')
         'width: ' + readerWidth + 'px;' +
         '-webkit-column-count: ' + column + ';' +
         '-moz-column-count: ' + column + ';' +
-        'column-count: ' + column + ';'
+        'column-count: ' + column + ';' +
+        'font-family: ' + $scope.font + ';'
       );
 
       readerHeight = $reader.outerHeight();
@@ -78,10 +87,23 @@ angular.module('readerApp')
           'width: ' + readerWidth + 'px;' +
           '-webkit-column-count: ' + column + ';' +
           '-moz-column-count: ' + column + ';' +
-          'column-count: ' + column + ';'
+          'column-count: ' + column + ';' +
+          'font-family: ' + $scope.font + ';'
         ).show();
       }
     };
+
+    $scope.$watch('font', function () {
+      if ($scope.font) {
+        window.WebFontConfig = {
+          google: {
+            families: [$scope.font]
+          }
+        };
+
+        $scope.bookLayout();
+      }
+    });
 
     $(function () {
       $scope.bookLayout();

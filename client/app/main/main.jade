@@ -27,20 +27,23 @@
                         span.hidden-sm.icon-right Contents
 
                     ul.dropdown-menu
-                        li Font
-                        li Size
-                        li Align
-                        li Columns
-                        li Theme
+                        li Item
+                        li Item
+                        li Item
 
-                li.dropdown(data-on-toggle="toggled(open)")
+                li.dropdown(data-not-close, data-on-toggle="toggled(open)")
                     a.dropdown-toggle(href="#", title="Settings")
                         span.fa.fa-cog
 
                         span.hidden-sm.icon-right Settings
 
-                    ul.dropdown-menu
-                        li Font
+                    ul.dropdown-menu(data-ng-click="$event.stopPropagation()")
+                        li
+                            label(for="fonts") Font
+
+                            select.form-control#fonts(data-ng-model='font')
+                                option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
+
                         li Size
                         li Align
                         li Columns
