@@ -69,13 +69,17 @@ angular.module('readerApp')
           readerWrapperWidth = $readerWrapper.outerWidth(),
           readerWrapperHeight = $readerWrapper.outerHeight(),
           readerWidth = readerWrapperWidth * column,
-          readerWrapperOffset = $readerWrapper.offset().left,
+          readerWrapperOffset = 0,
           style = 'width: ' + readerWidth + 'px;' +
             '-webkit-column-count: ' + $scope.columns * column + ';' +
             '-moz-column-count: ' + $scope.columns * column + ';' +
             'column-count: ' + $scope.columns * column + ';' +
             'font-family: ' + $scope.font + ';' +
             'text-align: ' + $scope.textAlign + ';';
+
+      if ($readerWrapper.length > 0) {
+        readerWrapperOffset = $readerWrapper.offset().left;
+      }
 
       $scope.readerWrapperWidth = readerWrapperWidth;
       $scope.readerWrapperOffset = readerWrapperOffset;
