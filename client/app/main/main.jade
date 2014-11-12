@@ -80,11 +80,13 @@
     .container-fluid
         .navbar-text {{ currentPage }} of {{ pages }}
 
-a.btn.btn-default.reader-btn-page.reader-btn-page-prev(href="#", title="Previous", data-ng-click="pagePrev()")
-    span.fa.fa-chevron-left
+a.reader-btn-page-wrapper.reader-btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()")
+    span.btn.btn-default.btn-sm.hidden-xs.reader-btn-page
+        span.fa.fa-chevron-left
 
-a.btn.btn-default.reader-btn-page.reader-btn-page-next(href="#", title="Next", data-ng-click="pageNext()")
-    span.fa.fa-chevron-right
+a.reader-btn-page-wrapper.reader-btn-page-wrapper-next(href="#", title="Next", data-ng-click="pageNext()")
+    span.btn.btn-default.btn-sm.hidden-xs.reader-btn-page
+        span.fa.fa-chevron-right
 
 .content#readerWrapper
     #reader
