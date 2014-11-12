@@ -12,6 +12,7 @@ angular.module('readerApp')
     $scope.textAlign = 'left';
     $scope.columns = 1;
     $scope.readerWrapperOffset = 0;
+    $scope.theme = 'white';
 
     var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
 
@@ -151,6 +152,8 @@ angular.module('readerApp')
     $scope.$watch('columns', function () {
       $scope.bookLayout();
     });
+
+    $scope.$watch('theme');
 
     $(function () {
       $scope.bookLayout();
