@@ -13,6 +13,7 @@ angular.module('readerApp')
     $scope.columns = 1;
     $scope.readerWrapperOffset = 0;
     $scope.theme = 'white';
+    $scope.readerLeft = 0;
 
     var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
 
@@ -21,11 +22,7 @@ angular.module('readerApp')
     });
 
     $scope.pagePrev = function () {
-      var left = $scope.activePage + $scope.readerWrapperWidth;
-
-      if ($scope.columns === 2) {
-        left += $scope.readerWrapperOffset - 13;
-      }
+      var left = $scope.activePage + $scope.readerLeft;
 
       if (left <= 0) {
         $scope.activePage = left;
@@ -39,11 +36,7 @@ angular.module('readerApp')
     };
 
     $scope.pageNext = function () {
-      var left = $scope.activePage - $scope.readerWrapperWidth;
-
-      if ($scope.columns === 2) {
-        left -= $scope.readerWrapperOffset - 13;
-      }
+      var left = $scope.activePage - $scope.readerLeft;
 
       if (-left < $scope.readerWidth) {
         $scope.activePage = left;
@@ -128,6 +121,26 @@ angular.module('readerApp')
         }
 
         $reader.attr('style', style).show();
+
+        var left = [],
+            leftPages = [],
+            leftNumber = 1;
+
+        $reader.find('*').each(function () {
+          left.push($(this).position().left);
+
+          $.each(left, function (i, el) {
+            if ($.inArray(el, leftPages) === -1) {
+              leftPages.push(el);
+            }
+          });
+        });
+
+        if ($scope.columns === 2) {
+          leftNumber = 2;
+        }
+
+        $scope.readerLeft = leftPages[leftNumber];
       }
     };
 
