@@ -1,6 +1,50 @@
 @navbar-inverse-color: #fff;
 @navbar-inverse-bg: #2a2a2a;
+
 @border-radius-base: 2px;
+
+@navbar-wrapper-height: @navbar-height + 20;
+
+.navbar-wrapper {
+  position: fixed;
+  z-index: @zindex-navbar;
+  width: 100%;
+  height: @navbar-wrapper-height;
+
+  &:hover,
+  &:focus,
+  &:active {
+    .navbar-fixed-top {
+      top: 0;
+    }
+
+    .navbar-fixed-bottom {
+      bottom: 0;
+    }
+  }
+
+  .navbar-fixed-top {
+    top: -@navbar-height;
+    .transition(top ease .3s);
+  }
+
+  .navbar-fixed-bottom {
+    bottom: -@navbar-height;
+    .transition(bottom ease .3s);
+  }
+}
+
+.navbar-wrapper-top {
+  top: 0;
+}
+
+.navbar-wrapper-bottom {
+  bottom: 0;
+}
+
+.navbar-inverse {
+  border: 0;
+}
 
 .navbar-header {
   float: left;
@@ -8,14 +52,6 @@
 
 .navbar-brand {
   padding: 10px @navbar-padding-horizontal;
-}
-
-.icon-left {
-  margin-right: .3em;
-}
-
-.icon-right {
-  margin-left: .3em;
 }
 
 .navbar-btns {
@@ -77,8 +113,6 @@
           left: auto;
           max-width: none;
           background: @navbar-inverse-bg;
-          border-top: 1px solid rgba(255, 255, 255, .1);
-          border-bottom: 1px solid rgba(255, 255, 255, .1);
           border-radius: 0;
         }
       }
@@ -128,6 +162,8 @@
   margin-top: -14px;
   border: 0;
   border-radius: 0;
+  background: transparent;
+  color: @text-color;
   opacity: 0;
 
   @media (min-width: @screen-md) {
@@ -135,6 +171,13 @@
     margin-top: -22.5px;
     border: 0;
     border-radius: 0;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background: rgba(0, 0, 0, .1);
+    color: @text-color;
   }
 }
 
@@ -148,8 +191,8 @@
 
 .content {
   position: absolute;
-  top: 100px;
-  bottom: 100px;
+  top: @navbar-wrapper-height;
+  bottom: @navbar-wrapper-height;
   left: 5%;
   right: 5%;
   overflow: hidden;
@@ -168,23 +211,42 @@
 .black {
   background: #000;
   color: #fff;
+
+  .reader-btn-page {
+    color: #fff;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: rgba(255, 255, 255, .1);
+    }
+  }
 }
 
 .sepia {
-  background: #d2b48c;
-  color: #592720;
+  background: #e7dfc8;
+  color: #331713;
+
+  .reader-btn-page {
+    color: #331713;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: rgba(0, 0, 0, .1);
+    }
+  }
 }
 
 .btn-color {
   .square(40px);
-  border: 3px solid @gray-lighter;
-  border-radius: 50%;
+  border-radius: @border-radius-large;
 
   &:hover,
   &:focus,
   &:active,
   &.active {
-    border-color: @brand-primary;
+    border: 3px solid @brand-primary;
     .box-shadow(none);
   }
 
@@ -202,7 +264,7 @@
 }
 
 .btn-sepia {
-  background: #d2b48c;
+  background: #e7dfc8;
 }
 
 .dropdown-menu {

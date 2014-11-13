@@ -1,79 +1,81 @@
-.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
-    .container-fluid
-        .navbar-header
-            a.navbar-brand(href="/", title="Mentelin")
-                img.img-responsive(src="assets/img/logo-sm.svg", alt="Mentelin")
+.navbar-wrapper.navbar-wrapper-top
+    .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href="/", title="Mentelin")
+                    img.img-responsive(src="assets/img/logo-sm.svg", alt="Mentelin")
 
-            p.navbar-text.hidden-xs Ф. М. Достоевский «Идиот»
+                p.navbar-text.hidden-xs Ф. М. Достоевский «Идиот»
 
-        ul.nav.navbar-nav.navbar-right.navbar-btns
-            li.dropdown(data-on-toggle="toggled(open)")
-                a.dropdown-toggle(href="#", title="Contents")
-                    span.fa.fa-list
+            ul.nav.navbar-nav.navbar-right.navbar-btns
+                li.dropdown(data-on-toggle="toggled(open)")
+                    a.dropdown-toggle(href="#", title="Contents")
+                        span.fa.fa-list
 
-                    span.hidden-xs.hidden-sm.icon-right Contents
+                        span.hidden-xs.hidden-sm.icon-right Contents
 
-                ul.dropdown-menu
-                    li Item
-                    li Item
-                    li Item
+                    ul.dropdown-menu
+                        li Item
+                        li Item
+                        li Item
 
-            li.dropdown(data-on-toggle="toggled(open)")
-                a.dropdown-toggle(href="#", title="Settings")
-                    span.fa.fa-cog
+                li.dropdown(data-on-toggle="toggled(open)")
+                    a.dropdown-toggle(href="#", title="Settings")
+                        span.fa.fa-cog
 
-                    span.hidden-xs.hidden-sm.icon-right Settings
+                        span.hidden-xs.hidden-sm.icon-right Settings
 
-                ul.dropdown-menu(data-ng-click="$event.stopPropagation()")
-                    li
-                        label(for="fonts") Font
+                    ul.dropdown-menu(data-ng-click="$event.stopPropagation()")
+                        li
+                            label(for="fonts") Font
 
-                        select.form-control#fonts(data-ng-model='font')
-                            option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
+                            select.form-control#fonts(data-ng-model='font')
+                                option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
 
-                    li Size
+                        li Size
 
-                    li
-                        p Align
+                        li
+                            p Align
 
-                        p.btn-group
-                            label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'left'")
-                                span.fa.fa-align-left
+                            p.btn-group
+                                label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'left'")
+                                    span.fa.fa-align-left
 
-                            label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'justify'")
-                                span.fa.fa-align-justify
+                                label.btn.btn-default(data-ng-model="textAlign", data-btn-radio="'justify'")
+                                    span.fa.fa-align-justify
 
-                    li
-                        p Columns
+                        li.hidden-xs.hidden-sm
+                            p Columns
 
-                        p.btn-group
-                            label.btn.btn-default(data-ng-model="columns", data-btn-radio="1")
-                                span.fa.fa-align-justify
+                            p.btn-group
+                                label.btn.btn-default(data-ng-model="columns", data-btn-radio="1")
+                                    span.fa.fa-align-justify
 
-                            label.btn.btn-default(data-ng-model="columns", data-btn-radio="2")
-                                span.fa.fa-align-justify.icon-left
+                                label.btn.btn-default(data-ng-model="columns", data-btn-radio="2")
+                                    span.fa.fa-align-justify.icon-left
 
-                                span.fa.fa-align-justify
+                                    span.fa.fa-align-justify
 
-                    li
-                        p Theme
+                        li
+                            p Theme
 
-                        p
-                            label.btn.btn-color.btn-white(data-ng-model="theme", data-btn-radio="'white'")
+                            p
+                                label.btn.btn-color.btn-white(data-ng-model="theme", data-btn-radio="'white'")
 
-                            label.btn.btn-color.btn-black(data-ng-model="theme", data-btn-radio="'black'")
+                                label.btn.btn-color.btn-black(data-ng-model="theme", data-btn-radio="'black'")
 
-                            label.btn.btn-color.btn-sepia(data-ng-model="theme", data-btn-radio="'sepia'")
+                                label.btn.btn-color.btn-sepia(data-ng-model="theme", data-btn-radio="'sepia'")
 
-            li
-                a(href="#", title="Bookmark")
-                    span.glyphicon.glyphicon-bookmark
+                li
+                    a(href="#", title="Bookmark")
+                        span.glyphicon.glyphicon-bookmark
 
-                    span.hidden-xs.hidden-sm.icon-right Bookmark
+                        span.hidden-xs.hidden-sm.icon-right Bookmark
 
-.navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
-    .container-fluid
-        .navbar-text {{ currentPage }} of {{ pages }}
+.navbar-wrapper.navbar-wrapper-bottom
+    .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
+        .container-fluid
+            .navbar-text {{ currentPage }} of {{ pages }}
 
 .content-wrapper(class="{{ theme }}")
     a.reader-btn-page-wrapper.reader-btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()")
