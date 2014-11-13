@@ -5,10 +5,10 @@
                 a.navbar-brand(href="/", title="Mentelin")
                     img.img-responsive(src="assets/img/logo-sm.svg", alt="Mentelin")
 
-                p.navbar-text.hidden-xs Ф. М. Достоевский «Идиот»
+                p.navbar-text.hidden-xs {{ book.author }} «{{ book.title }}»
 
             ul.nav.navbar-nav.navbar-right.navbar-btns
-                li.dropdown(data-on-toggle="toggled(open)")
+                li.dropdown(data-is-open="isopen.content")
                     a.dropdown-toggle(href="#", title="Contents")
                         span.fa.fa-list
 
@@ -19,7 +19,7 @@
                         li Item
                         li Item
 
-                li.dropdown(data-on-toggle="toggled(open)")
+                li.dropdown(data-is-open="isopen.settings")
                     a.dropdown-toggle(href="#", title="Settings")
                         span.fa.fa-cog
 
@@ -75,16 +75,18 @@
 .navbar-wrapper.navbar-wrapper-bottom
     .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
         .container-fluid
-            .navbar-text {{ currentPage }} of {{ pages }}
 
-.content-wrapper(class="{{ theme }}")
-    a.reader-btn-page-wrapper.reader-btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()")
-        span.btn.btn-default.btn-sm.hidden-xs.reader-btn-page
-            span.fa.fa-chevron-left
+a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()")
+    span.btn.btn-default.btn-sm.hidden-xs.btn-page
+        span.fa.fa-chevron-left
 
-    a.reader-btn-page-wrapper.reader-btn-page-wrapper-next(href="#", title="Next", data-ng-click="pageNext()")
-        span.btn.btn-default.btn-sm.hidden-xs.reader-btn-page
-            span.fa.fa-chevron-right
+a.btn-page-wrapper.btn-page-wrapper-next(href="#", title="Next", data-ng-click="pageNext()")
+    span.btn.btn-default.btn-sm.hidden-xs.btn-page
+        span.fa.fa-chevron-right
+
+.content-wrapper(data-ng-class="theme", data-ng-click="toggleNavbar()")
+    p.content-title «{{ book.title }}»
+    p.content-pages {{ currentPage }} of {{ pages }}
 
     .content#readerWrapper
         #reader

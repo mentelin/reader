@@ -23,6 +23,7 @@ module.exports = function(config) {
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/ng-file-upload/angular-file-upload.js',
+      'client/bower_components/angular-touch/angular-touch.js',
       'client/bower_components/SVGMagic/src/jquery.svgmagic.js',
       'client/app/app.js',
       'client/app/app.coffee',

@@ -14,6 +14,15 @@ angular.module('readerApp')
     $scope.readerWrapperOffset = 0;
     $scope.theme = 'white';
     $scope.readerLeft = 0;
+    $scope.isopen = {
+      content: false,
+      settings: false,
+      navbar: false
+    };
+    $scope.book = {
+      title: 'Идиот',
+      author: 'Ф. М. Достоевский'
+    };
 
     var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
 
@@ -144,6 +153,21 @@ angular.module('readerApp')
       }
     };
 
+    $scope.toggleNavbar = function () {
+      if ($scope.isopen.navbar || $scope.isopen.settings || $scope.isopen.content || !($('.navbar-fixed-top').hasClass('open'))) {
+        $('.navbar-fixed-top').addClass('open');
+        $('.navbar-fixed-bottom').addClass('open');
+
+        $scope.isopen.navbar = false;
+      }
+      else {
+        $('.navbar-fixed-top').removeClass('open');
+        $('.navbar-fixed-bottom').removeClass('open');
+
+        $scope.isopen.navbar = true;
+      }
+    };
+
     $scope.$watch('font', function () {
       if ($scope.font) {
         window.WebFontConfig = {
@@ -167,6 +191,32 @@ angular.module('readerApp')
     });
 
     $scope.$watch('theme');
+
+    $scope.$watch('isopen.content', function () {
+      if ($scope.isopen.navbar || $scope.isopen.settings || $scope.isopen.content || !($('.navbar-fixed-top').hasClass('open'))) {
+        $('.navbar-fixed-top').addClass('open');
+      }
+      else {
+        $('.navbar-fixed-top').removeClass('open');
+
+        if ($('.navbar-fixed-bottom').hasClass('open')) {
+          $('.navbar-fixed-bottom').removeClass('open');
+        }
+      }
+    });
+
+    $scope.$watch('isopen.settings', function () {
+      if ($scope.isopen.navbar || $scope.isopen.settings || $scope.isopen.content || !($('.navbar-fixed-top').hasClass('open'))) {
+        $('.navbar-fixed-top').addClass('open');
+      }
+      else {
+        $('.navbar-fixed-top').removeClass('open');
+
+        if ($('.navbar-fixed-bottom').hasClass('open')) {
+          $('.navbar-fixed-bottom').removeClass('open');
+        }
+      }
+    });
 
     $(function () {
       $scope.bookLayout();
