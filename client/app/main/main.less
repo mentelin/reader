@@ -84,8 +84,8 @@
 
       .dropdown-menu {
         @media (max-width: @grid-float-breakpoint) {
-          position: fixed;
-          top: 51px;
+          position: absolute;
+          top: @navbar-height + 10;
           right: 0;
           left: auto;
           max-width: none;
@@ -98,10 +98,20 @@
 }
 
 .dropdown-menu {
+  top: @navbar-height + 10;
   min-width: 200px;
   padding: 10px 15px;
   background: @navbar-inverse-bg;
   color: #fff;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    top: -20px;
+    right: 12px;
+    border: 10px solid transparent;
+    border-bottom-color: @navbar-inverse-bg;
+  }
 }
 
 .btn-color {
@@ -334,6 +344,56 @@
     &:active {
       border: 3px solid @brand-primary;
       .box-shadow(none);
+    }
+  }
+}
+
+.touch {
+  .navbar-btns {
+    > li {
+      > a {
+        &:focus,
+        &:active {
+          background: darken(@brand-primary, 10%);
+        }
+      }
+    }
+  }
+
+  .navbar-inverse {
+    .navbar-btns {
+      li {
+        a {
+          &:focus,
+          &:active {
+            background: darken(@brand-primary, 10%);
+          }
+        }
+      }
+
+      .open {
+        a {
+          &,
+          &:focus,
+          &:active {
+            background: darken(@brand-primary, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.standalone {
+  .navbar-wrapper {
+    .navbar-fixed-top {
+      top: -(@navbar-height + 10px);
+      height: @navbar-height + 10px;
+      padding-top: 10px;
+
+      &.open {
+        top: 0;
+      }
     }
   }
 }
