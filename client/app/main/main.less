@@ -352,6 +352,10 @@
   .navbar-btns {
     > li {
       > a {
+        &:hover {
+          background: @brand-primary;
+        }
+
         &:focus,
         &:active {
           background: darken(@brand-primary, 10%);
@@ -364,6 +368,10 @@
     .navbar-btns {
       li {
         a {
+          &:hover {
+            background: @brand-primary;
+          }
+
           &:focus,
           &:active {
             background: darken(@brand-primary, 10%);
@@ -374,6 +382,7 @@
       .open {
         a {
           &,
+          &:hover,
           &:focus,
           &:active {
             background: darken(@brand-primary, 10%);
@@ -387,9 +396,9 @@
 .standalone {
   .navbar-wrapper {
     .navbar-fixed-top {
-      top: -(@navbar-height + 10px);
-      height: @navbar-height + 10px;
-      padding-top: 10px;
+      top: -(@navbar-height + 15px);
+      height: @navbar-height + 15px;
+      padding-top: 15px;
 
       &.open {
         top: 0;
