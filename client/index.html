@@ -5,8 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, minimal-ui">
-    <meta name="viewport", content="width=device-width, initial-scale=1">
+    <meta name="viewport", content="width=device-width, initial-scale=1, user-scalable=no">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="cleartype" content="on">
@@ -19,7 +18,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Mentelin">
+    <meta name="apple-mobile-web-app-title" content="Mentelin Reader">
 
     <!-- Tile icon for Win8 (144x144-precomposed.png + tile color HEX) -->
     <meta name="msapplication-TileImage" content="ms-touch-icon-144x144-precomposed.png">
@@ -32,9 +31,8 @@
     <link rel="shortcut icon" href="touch-icon-196x196.png" sizes="196x196">
 
     <base href="/">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <title>Mentelin Reader</title>
+    <meta name="description" content="Mentelin Reader">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -81,6 +79,7 @@
     <![endif]-->
     <!-- build:js({client,node_modules}) app/vendor.js -->
       <!-- bower:js -->
+      <script src="bower_components/modernizr/modernizr.js"></script>
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>

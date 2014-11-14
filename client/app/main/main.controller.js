@@ -168,6 +168,12 @@ angular.module('readerApp')
       }
     };
 
+    $scope.checkStandalone = function () {
+      if (window.navigator.standalone) {
+        return 'standalone';
+      }
+    };
+
     $scope.$watch('font', function () {
       if ($scope.font) {
         window.WebFontConfig = {

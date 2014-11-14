@@ -132,7 +132,7 @@
 
 .btn-page-wrapper {
   position: fixed;
-  z-index: @zindex-navbar;
+  z-index: @zindex-navbar - 1;
   top: 0;
   bottom: 0;
   display: block;
@@ -193,7 +193,7 @@
   right: 5%;
   overflow: hidden;
 
-  @media (min-width: @screen-md) {
+  @media (min-width: @screen-sm) {
     left: 11%;
     right: 11%;
   }

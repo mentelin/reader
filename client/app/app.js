@@ -2,6 +2,12 @@
 
 $(function () {
   $(document).svgmagic();
+
+  $(document).on('touchmove', 'body', function (e) {
+    if (!$('.scrollable').has($(e.target)).length) {
+      e.preventDefault();
+    }
+ });
 });
 
 angular.module('readerApp', [
