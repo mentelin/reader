@@ -7,6 +7,7 @@ angular.module('readerApp')
     $scope.activePage = 0;
     $scope.pages = 1;
     $scope.currentPage = 1;
+    $scope.prevPage = 0;
     $scope.fonts = [];
     $scope.font = '';
     $scope.textAlign = 'left';
@@ -36,12 +37,13 @@ angular.module('readerApp')
 
       if (left <= 0) {
         $scope.activePage = left;
+        $scope.prevPage = $scope.currentPage;
 
         $('#reader').css({
           marginLeft: left
         });
 
-        $scope.currentPage -= 1;
+        $scope.currentPage = parseInt($scope.currentPage) - 1;
       }
     };
 
@@ -50,22 +52,26 @@ angular.module('readerApp')
 
       if (-left < $scope.readerWidth) {
         $scope.activePage = left;
+        $scope.prevPage = $scope.currentPage;
 
         $('#reader').css({
           marginLeft: left
         });
 
-        $scope.currentPage += 1;
+        $scope.currentPage = parseInt($scope.currentPage) + 1;
       }
     };
 
     $scope.bookLayout = function () {
       var $reader = $('#reader'),
-          $readerWrapper = $('#readerWrapper');
+          $readerWrapper = $('#readerWrapper'),
+          style = 'font-family: ' + $scope.font + ';' +
+            'font-size: ' + $scope.fontSize + 'px;' +
+            'text-align: ' + $scope.textAlign + ';';
 
       $scope.activePage = 0;
       $scope.currentPage = 1;
-      $reader.removeAttr('style').hide();
+      $reader.removeAttr('style').attr('style', style).hide();
 
       var windowHeight = $(window).outerHeight() - 200,
           readerHeight = $reader.outerHeight(),
@@ -74,14 +80,12 @@ angular.module('readerApp')
           readerWrapperHeight = $readerWrapper.outerHeight(),
           readerWidth = readerWrapperWidth * column,
           readerWrapperOffset = 0,
-          columnsWidth = readerWrapperWidth,
-          style = 'width: ' + readerWidth + 'px;' +
-            '-webkit-column-count: ' + column + ';' +
-            '-moz-column-count: ' + column + ';' +
-            'column-count: ' + column + ';' +
-            'font-family: ' + $scope.font + ';' +
-            'font-size: ' + $scope.fontSize + 'px;' +
-            'text-align: ' + $scope.textAlign + ';';
+          columnsWidth = readerWrapperWidth;
+
+      style += 'width: ' + readerWidth + 'px;' +
+        '-webkit-column-count: ' + column + ';' +
+        '-moz-column-count: ' + column + ';' +
+        'column-count: ' + column + ';';
 
       if ($readerWrapper.length > 0) {
         readerWrapperOffset = $readerWrapper.offset().left;
@@ -206,6 +210,15 @@ angular.module('readerApp')
     $scope.$watch('columns', function () {
       $scope.bookLayout();
     });
+
+    // $scope.$watch('currentPage', function () {
+    //   if ($scope.currentPage > $scope.prevPage) {
+    //     $scope.pageNext();
+    //   }
+    //   else {
+    //     $scope.pagePrev();
+    //   }
+    // });
 
     $scope.$watch('theme');
 

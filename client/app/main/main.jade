@@ -30,13 +30,14 @@ div(data-ng-class="checkStandalone()")
                             li
                                 label(for="fonts") Font
 
-                                select.form-control#fonts(data-ng-model='font')
+                                p: select.form-control#fonts(data-ng-model='font')
                                     option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
 
                             li
                                 p Size
 
-                                div(data-slider, data-ng-model="fontSize", data-floor="8", data-ceiling="36", data-step="1")
+                                p: input(type="range", data-ng-model="fontSize", min="10", max="36")
+                                //- div(data-slider, data-ng-model="fontSize", data-floor="10", data-ceiling="36", data-step="1")
 
                             li
                                 p Align
@@ -79,6 +80,8 @@ div(data-ng-class="checkStandalone()")
     .navbar-wrapper.navbar-wrapper-bottom
         .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
             .container-fluid
+                form.navbar-form
+                    input(type="range", data-ng-model="currentPage", min="1", max="{{ pages }}")
 
     a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev()")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page
