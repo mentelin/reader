@@ -33,7 +33,10 @@ div(data-ng-class="checkStandalone()")
                                 select.form-control#fonts(data-ng-model='font')
                                     option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
 
-                            li Size
+                            li
+                                p Size
+
+                                div(data-slider, data-ng-model="fontSize", data-floor="8", data-ceiling="36", data-step="1")
 
                             li
                                 p Align

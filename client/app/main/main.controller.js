@@ -23,6 +23,7 @@ angular.module('readerApp')
       title: 'Идиот',
       author: 'Ф. М. Достоевский'
     };
+    $scope.fontSize = 14;
 
     var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w';
 
@@ -79,6 +80,7 @@ angular.module('readerApp')
             '-moz-column-count: ' + column + ';' +
             'column-count: ' + column + ';' +
             'font-family: ' + $scope.font + ';' +
+            'font-size: ' + $scope.fontSize + 'px;' +
             'text-align: ' + $scope.textAlign + ';';
 
       if ($readerWrapper.length > 0) {
@@ -118,6 +120,7 @@ angular.module('readerApp')
           '-moz-column-count: ' + column + ';' +
           'column-count: ' + column + ';' +
           'font-family: ' + $scope.font + ';' +
+          'font-size: ' + $scope.fontSize + 'px;' +
           'text-align: ' + $scope.textAlign + ';';
 
         if ($scope.columns === 2) {
@@ -184,6 +187,14 @@ angular.module('readerApp')
 
         $scope.bookLayout();
       }
+    });
+
+    $scope.$watch('fontSize', function () {
+      $('#reader').css({
+        fontSize: $scope.fontSize
+      });
+
+      $scope.bookLayout();
     });
 
     $scope.$watch('textAlign', function () {
