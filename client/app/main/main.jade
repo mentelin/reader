@@ -80,8 +80,7 @@ div(data-ng-class="checkStandalone()")
     .navbar-wrapper.navbar-wrapper-bottom
         .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
             .container-fluid
-                form.navbar-form
-                    input(type="range", data-ng-model="currentPage", min="1", max="{{ pages }}")
+                input.navbar-range(type="range", data-ng-model="currentPage", min="1", max="{{ pages }}")
 
     a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev()")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page

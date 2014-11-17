@@ -211,14 +211,30 @@ angular.module('readerApp')
       $scope.bookLayout();
     });
 
-    // $scope.$watch('currentPage', function () {
-    //   if ($scope.currentPage > $scope.prevPage) {
-    //     $scope.pageNext();
-    //   }
-    //   else {
-    //     $scope.pagePrev();
-    //   }
-    // });
+    $scope.$watch('currentPage', function () {
+      var left = ($scope.currentPage * $scope.readerLeft) - $scope.readerLeft;
+
+      if ($scope.currentPage > $scope.prevPage) {
+        if (-left < $scope.readerWidth) {
+          $scope.activePage = -left;
+
+          $('#reader').css({
+            marginLeft: -left
+          });
+        }
+      }
+      else {
+        if (left <= 0) {
+          $scope.activePage = left;
+
+          $('#reader').css({
+            marginLeft: left
+          });
+        }
+      }
+
+      $scope.prevPage = $scope.currentPage;
+    });
 
     $scope.$watch('theme');
 
