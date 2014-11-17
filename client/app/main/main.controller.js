@@ -72,6 +72,7 @@ angular.module('readerApp')
       $scope.activePage = 0;
       $scope.currentPage = 1;
       $reader.removeAttr('style').attr('style', style).hide();
+      $('#sliderPages').find('.bar.steps').width(0);
 
       var windowHeight = $(window).outerHeight() - 200,
           readerHeight = $reader.outerHeight(),
@@ -194,6 +195,10 @@ angular.module('readerApp')
     });
 
     $scope.$watch('fontSize', function () {
+      var width = $('#sliderSizes').find('.pointer.low').css('left');
+
+      $('#sliderSizes').find('.bar.steps').width(width);
+
       $('#reader').css({
         fontSize: $scope.fontSize
       });
@@ -212,7 +217,10 @@ angular.module('readerApp')
     });
 
     $scope.$watch('currentPage', function () {
-      var left = ($scope.currentPage * $scope.readerLeft) - $scope.readerLeft;
+      var left = ($scope.currentPage * $scope.readerLeft) - $scope.readerLeft,
+          width = $('#sliderPages').find('.pointer.low').css('left');
+
+      $('#sliderPages').find('.bar.steps').width(width);
 
       if ($scope.currentPage > $scope.prevPage) {
         if (-left < $scope.readerWidth) {

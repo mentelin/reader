@@ -52,6 +52,33 @@ button,
   }
 }
 
+.slider {
+  position: relative;
+
+  .bar {
+    &.full {
+      height: 5px;
+      background: #fff;
+    }
+
+    &.steps {
+      height: 5px;
+      background: @brand-primary;
+    }
+  }
+
+  .pointer {
+    .square(10px);
+    margin-top: -2.5px;
+    background: @brand-primary;
+    .rotate(45deg);
+  }
+
+  .bubble {
+    display: none !important;
+  }
+}
+
 // injector
 @import 'account/login/login.less';
 @import 'admin/admin.less';
