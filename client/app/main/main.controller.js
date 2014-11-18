@@ -195,10 +195,6 @@ angular.module('readerApp')
     });
 
     $scope.$watch('fontSize', function () {
-      var width = $('#sliderSizes').find('.pointer.low').css('left');
-
-      $('#sliderSizes').find('.bar.steps').width(width);
-
       $('#reader').css({
         fontSize: $scope.fontSize
       });
@@ -210,6 +206,8 @@ angular.module('readerApp')
       $('#reader').css({
         textAlign: $scope.textAlign
       });
+
+      $scope.bookLayout();
     });
 
     $scope.$watch('columns', function () {
@@ -217,10 +215,7 @@ angular.module('readerApp')
     });
 
     $scope.$watch('currentPage', function () {
-      var left = ($scope.currentPage * $scope.readerLeft) - $scope.readerLeft,
-          width = $('#sliderPages').find('.pointer.low').css('left');
-
-      $('#sliderPages').find('.bar.steps').width(width);
+      var left = ($scope.currentPage * $scope.readerLeft) - $scope.readerLeft;
 
       if ($scope.currentPage > $scope.prevPage) {
         if (-left < $scope.readerWidth) {

@@ -53,29 +53,42 @@ button,
 }
 
 .slider {
-  position: relative;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
 
-  .bar {
-    &.full {
-      height: 5px;
-      background: #fff;
-    }
-
-    &.steps {
-      height: 5px;
-      background: @brand-primary;
-    }
+  &.ngrs-focus {
+    .box-shadow(none);
   }
 
-  .pointer {
+  .ngrs-runner {
+    height: 3px;
+    margin: 0;
+  }
+
+  .ngrs-handle {
     .square(10px);
-    margin-top: -2.5px;
-    background: @brand-primary;
+    margin: -4px -5px;
+    border: 0;
+    border-radius: 0;
     .rotate(45deg);
+    background: @brand-primary;
+
+    &.ngrs-down {
+      .box-shadow(none);
+    }
+
+    &.ngrs-over i {
+      background: none;
+    }
   }
 
-  .bubble {
-    display: none !important;
+  .ngrs-join {
+    height: 3px;
+    margin-top: -2px;
+    border-radius: 0;
+    background: @brand-primary;
   }
 }
 
