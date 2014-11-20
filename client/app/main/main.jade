@@ -16,9 +16,8 @@ div(data-ng-class="checkStandalone()")
                             span.hidden-xs.hidden-sm.icon-right Contents
 
                         ul.dropdown-menu
-                            li Item
-                            li Item
-                            li Item
+                            li
+                                a#btn(href="#", title="Upload from Dropbox", data-ng-click="uploadDropbox()") Upload from Dropbox
 
                     li.dropdown(data-is-open="isopen.settings")
                         a.dropdown-toggle(href="#", title="Settings")
@@ -30,13 +29,11 @@ div(data-ng-class="checkStandalone()")
                             li
                                 label(for="fonts") Font
 
-                                p: select.form-control#fonts(data-ng-model='font')
-                                    option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
+                                p: select.form-control#fonts(data-ng-model="font")
+                                    option(value="{{ font.family }}", data-ng-repeat="font in fonts.items", data-ng-click="changeFont()") {{ font.family }}
 
                             li
                                 p Size
-
-                                //- p: input(type="range", data-ng-model="fontSize", min="10", max="36")
 
                                 .slider.slider-font-size#sliderSizes(data-slider, data-ng-model="fontSize", data-floor="10", data-ceiling="36", data-step="1")
 
@@ -82,8 +79,6 @@ div(data-ng-class="checkStandalone()")
         .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
             .container-fluid
                 .slider.slider-pages#sliderPages(data-slider, data-ng-model="currentPage", data-floor="1", data-ceiling="{{ pages }}", data-step="1")
-
-                //- input.navbar-range(type="range", data-ng-model="currentPage", min="1", max="{{ pages }}")
 
     a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev()")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page
