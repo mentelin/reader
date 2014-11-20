@@ -24,7 +24,7 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/ng-file-upload/angular-file-upload.js',
       'client/bower_components/angular-touch/angular-touch.js',
-      'client/bower_components/venturocket-angular-slider/build/angular-slider.js',
+      'client/bower_components/angular-rangeslider/angular.rangeSlider.js',
       'client/bower_components/jszip-utils/dist/jszip-utils.js',
       'client/bower_components/jszip/jszip.min.js',
       'client/bower_components/SVGMagic/src/jquery.svgmagic.js',

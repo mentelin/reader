@@ -19,7 +19,7 @@ angular.module('readerApp', [
   'ui.bootstrap',
   'angularFileUpload',
   'ngTouch',
-  'vr.directives.slider'
+  'ui-rangeSlider'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

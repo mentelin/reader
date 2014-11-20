@@ -35,7 +35,7 @@ div(data-ng-class="checkStandalone()")
                             li
                                 p Size
 
-                                .slider.slider-font-size#sliderSizes(data-slider, data-ng-model="fontSize", data-floor="10", data-ceiling="36", data-step="1")
+                                .slider.slider-font-size(data-range-slider, data-min="10", data-max="36", data-model-max="fontSize", data-pin-handle="min")
 
                             li
                                 p Align
@@ -78,7 +78,7 @@ div(data-ng-class="checkStandalone()")
     .navbar-wrapper.navbar-wrapper-bottom
         .navbar.navbar-inverse.navbar-fixed-bottom(role="navigation")
             .container-fluid
-                .slider.slider-pages#sliderPages(data-slider, data-ng-model="currentPage", data-floor="1", data-ceiling="{{ pages }}", data-step="1")
+                .slider.slider-pages(data-range-slider, data-min="1", data-max="pages", data-model-max="currentPage", data-pin-handle="min")
 
     a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev()")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page
