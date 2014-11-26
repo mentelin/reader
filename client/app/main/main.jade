@@ -16,9 +16,8 @@ div(data-ng-class="checkStandalone()")
                             span.hidden-xs.hidden-sm.icon-right Contents
 
                         ul.dropdown-menu
-                            li Item
-                            li Item
-                            li Item
+                            li
+                                a#btn(href="#", title="Upload from Dropbox", data-ng-click="uploadDropbox()") Upload from Dropbox
 
                     li.dropdown(data-is-open="isopen.settings")
                         a.dropdown-toggle(href="#", title="Settings")
@@ -30,8 +29,8 @@ div(data-ng-class="checkStandalone()")
                             li
                                 label(for="fonts") Font
 
-                                p: select.form-control#fonts(data-ng-model='font')
-                                    option(value='{{ font.family }}', data-ng-repeat='font in fonts.items', data-ng-click='changeFont()') {{ font.family }}
+                                p: select.form-control#fonts(data-ng-model="font")
+                                    option(value="{{ font.family }}", data-ng-repeat="font in fonts.items", data-ng-click="changeFont()") {{ font.family }}
 
                             li
                                 p Size
