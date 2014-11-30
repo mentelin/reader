@@ -29,6 +29,7 @@
       $scope.read = Epub.read;
 
       var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w',
+          checkState,
           options = {
             success: function (files) {
               JSZipUtils.getBinaryContent(files[0].link, function (err, data) {
@@ -37,7 +38,14 @@
                 }
 
                 $scope.read(data, '#reader');
-                $scope.bookLayout();
+
+                checkState = setInterval(function () {
+                  if ($('#reader').hasClass('ready')) {
+                    $scope.bookLayout();
+
+                    clearInterval(checkState);
+                  }
+                }, 1000);
               });
             },
 
@@ -50,6 +58,22 @@
 
       $http.get('https://www.googleapis.com/webfonts/v1/webfonts?key=' + key).success(function (fonts) {
         $scope.fonts = fonts;
+      });
+
+      JSZipUtils.getBinaryContent('/assets/books/moby-dick.epub', function (err, data) {
+        if (err) {
+          throw err;
+        }
+
+        $scope.read(data, '#reader');
+
+        checkState = setInterval(function () {
+          if ($('#reader').hasClass('ready')) {
+            $scope.bookLayout();
+
+            clearInterval(checkState);
+          }
+        }, 1000);
       });
 
       $scope.pagePrev = function () {
