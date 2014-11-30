@@ -129,8 +129,10 @@
           });
 
           $(container).find('*').each(function () {
-            $(this).attr('style', '');
-          }).addClass('ready');
+            $(this).removeAttr('style');
+          });
+
+          $(container).addClass('ready');
         }
       };
     });

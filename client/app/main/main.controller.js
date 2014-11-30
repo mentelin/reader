@@ -140,13 +140,14 @@
           $scope.readerWidth = readerWidth;
           $scope.pages = column;
 
-          style = 'width: ' + readerWidth + 'px;' +
-            '-webkit-column-count: ' + column + ';' +
-            '-moz-column-count: ' + column + ';' +
-            'column-count: ' + column + ';' +
-            'font-family: ' + $scope.font + ';' +
+          style = 'font-family: ' + $scope.font + ';' +
             'font-size: ' + $scope.fontSize + 'px;' +
             'text-align: ' + $scope.textAlign + ';';
+
+          style += 'width: ' + readerWidth + 'px;' +
+            '-webkit-column-count: ' + column + ';' +
+            '-moz-column-count: ' + column + ';' +
+            'column-count: ' + column + ';';
 
           if ($scope.columns === 2) {
             style += '-webkit-column-gap: ' + readerWrapperOffset + 'px;' +
