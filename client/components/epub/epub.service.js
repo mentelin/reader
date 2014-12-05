@@ -83,6 +83,8 @@
 
           $(container).html('');
 
+          var chapters = [];
+
           for (var i = 0; i < navPoints.length; i++) {
             var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
                 navPointXml = $.parseXML(navPointFile),
@@ -92,8 +94,10 @@
             // console.log(navPointXml);
             // console.log(chapter);
 
-            $(container).append(chapter);
+            chapters.push(chapter);
           }
+
+          $(container).append(chapters);
 
           $(container).find('img').each(function () {
             if (this.length !== 0) {
