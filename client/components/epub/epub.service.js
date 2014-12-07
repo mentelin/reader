@@ -1,4 +1,4 @@
-(function ($, angular, JSZip) {
+(function ($, angular, JSZip, escape) {
   'use strict';
 
   angular.module('readerApp')
@@ -75,7 +75,7 @@
 
           $tocXml.find('navPoint').each(function () {
             var $content = $(this).find('content'),
-                label = $(this).find('navLabel').find('text').text(),
+                // label = $(this).find('navLabel').find('text').text(),
                 src = $content.attr('src');
 
             // console.log(src);
@@ -85,8 +85,7 @@
 
           $(container).html('');
 
-          var chapters = {},
-              chaptersContent = '';
+          var chaptersContent = '';
 
           for (var i = 0; i < navPoints.length; i++) {
             var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
@@ -146,4 +145,4 @@
         }
       };
     });
-})(window.jQuery, window.angular, window.JSZip);
+})(window.jQuery, window.angular, window.JSZip, window.escape);
