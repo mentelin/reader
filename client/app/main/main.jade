@@ -80,15 +80,15 @@ div(data-ng-class="checkStandalone()")
             .container-fluid
                 .slider.slider-pages(data-range-slider, data-min="1", data-max="pages", data-model-max="currentPage", data-pin-handle="min")
 
-    a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev()")
+    a.btn-page-wrapper.btn-page-wrapper-prev(href="#", title="Previous", data-ng-click="pagePrev()", data-ng-swipe-right="pagePrev(); swiping=true;")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page
             span.fa.fa-chevron-left
 
-    a.btn-page-wrapper.btn-page-wrapper-next(href="#", title="Next", data-ng-click="pageNext()", data-ng-swipe-left="pageNext()")
+    a.btn-page-wrapper.btn-page-wrapper-next(href="#", title="Next", data-ng-click="pageNext()", data-ng-swipe-left="pageNext(); swiping=true;")
         span.btn.btn-default.btn-sm.hidden-xs.btn-page
             span.fa.fa-chevron-right
 
-    .content-wrapper(data-ng-class="theme", data-ng-click="toggleNavbar()", data-ng-swipe-right="pagePrev()", data-ng-swipe-left="pageNext()")
+    .content-wrapper(data-ng-class="theme", data-ng-click="toggleNavbar()", data-ng-swipe-right="pagePrev(); swiping=true;", data-ng-swipe-left="pageNext(); swiping=true;")
         p.content-title «{{ book.title }}»
         p.content-pages {{ currentPage }} of {{ pages }}
 

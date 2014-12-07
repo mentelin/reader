@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('readerApp')
-    .factory('Epub', function () {
+    .factory('Epub', function ($rootScope) {
       var bookObj = {};
 
       return {
@@ -71,10 +71,12 @@
               $tocXml = $(tocXml),
               navPoints = [];
 
-          // console.log(tocXml);
+          console.log(tocXml);
 
-          $tocXml.find('navPoint').find('content').each(function () {
-            var src = $(this).attr('src');
+          $tocXml.find('navPoint').each(function () {
+            var $content = $(this).find('content'),
+                label = $(this).find('navLabel').find('text').text(),
+                src = $content.attr('src');
 
             // console.log(src);
 
@@ -83,7 +85,8 @@
 
           $(container).html('');
 
-          var chapters = [];
+          var chapters = {},
+              chaptersContent = '';
 
           for (var i = 0; i < navPoints.length; i++) {
             var navPointFile = zip.folder(mainFolder).file(navPoints[i]).asText(),
@@ -93,11 +96,14 @@
 
             // console.log(navPointXml);
             // console.log(chapter);
+            // console.log(navPoints[i]);
 
-            chapters.push(chapter);
+            // localStorage[escape(bookObj.name + '-' + navPoints[i])] = chapter;
+            $rootScope.chapters[escape(navPoints[i])] = chapter;
+            chaptersContent += chapter;
           }
 
-          $(container).append(chapters);
+          $(container).append(chaptersContent);
 
           $(container).find('img').each(function () {
             if (this.length !== 0) {
