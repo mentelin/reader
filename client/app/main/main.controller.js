@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('readerApp')
-    .controller('MainCtrl', function ($scope, $http, Epub, $rootScope) {
+    .controller('MainCtrl', function ($scope, $http, Epub) {
       $scope.readerWrapperWidth = 0;
       $scope.readerWidth = 0;
       $scope.activePage = 0;
@@ -27,7 +27,10 @@
       };
       $scope.fontSize = 14;
       $scope.read = Epub.read;
-      $rootScope.chapters = {};
+
+      $scope.$watch(Epub.book, function (book) {
+        $scope.book = book;
+      });
 
       var key = 'AIzaSyDkQO90-vrm4Lm_XahUtgAAuVgOZ--wg5w',
           checkState,

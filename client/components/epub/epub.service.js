@@ -1,11 +1,11 @@
-(function ($, angular, JSZip, escape) {
+(function ($, angular, JSZip) {
   'use strict';
 
   angular.module('readerApp')
-    .factory('Epub', function ($rootScope) {
-      var bookObj = {};
-
+    .factory('Epub', function () {
       return {
+        book: {},
+
         read: function (file, container) {
           var zip = new JSZip(file);
 
@@ -42,13 +42,15 @@
             }
           });
 
-          // console.log($packageXml.find('metadata').find('dtitle').text());
+          // console.log($packageXml.find('metadata').find('title').text());
           // console.log($packageXml.find('metadata').find('creator').text());
 
-          bookObj = {
+          this.book = {
             name: $packageXml.find('metadata').find('title').text(),
             author: $packageXml.find('metadata').find('creator').text()
           };
+
+          // console.log(this.book);
 
           // $packageXml.find('manifest').find('item').each(function () {
           //   var media = $(this).attr('media-type');
@@ -71,7 +73,7 @@
               $tocXml = $(tocXml),
               navPoints = [];
 
-          console.log(tocXml);
+          // console.log(tocXml);
 
           $tocXml.find('navPoint').each(function () {
             var $content = $(this).find('content'),
@@ -97,8 +99,8 @@
             // console.log(chapter);
             // console.log(navPoints[i]);
 
-            // localStorage[escape(bookObj.name + '-' + navPoints[i])] = chapter;
-            $rootScope.chapters[escape(navPoints[i])] = chapter;
+            // localStorage[escape(this.book.name + '-' + navPoints[i])] = chapter;
+            // $rootScope.chapters[escape(navPoints[i])] = chapter;
             chaptersContent += chapter;
           }
 
@@ -145,4 +147,4 @@
         }
       };
     });
-})(window.jQuery, window.angular, window.JSZip, window.escape);
+})(window.jQuery, window.angular, window.JSZip);

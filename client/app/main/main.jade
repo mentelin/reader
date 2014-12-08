@@ -6,7 +6,7 @@ div(data-ng-class="checkStandalone()")
                     a.navbar-brand(href="/", title="Mentelin")
                         img.img-responsive(src="assets/img/logo-sm.svg", alt="Mentelin")
 
-                    p.navbar-text.hidden-xs {{ book.author }} «{{ book.title }}»
+                    p.navbar-text.hidden-xs {{ book.author }} «{{ book.title }}» {{ bookG.book }}
 
                 ul.nav.navbar-nav.navbar-right.navbar-btns
                     li.dropdown(data-is-open="isopen.content")
