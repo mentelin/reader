@@ -4,7 +4,11 @@
   angular.module('readerApp')
     .factory('Epub', function () {
       return {
-        book: {},
+        book: {
+          title: '',
+          author: '',
+          chapters: []
+        },
 
         read: function (file, container) {
           var zip = new JSZip(file);
@@ -46,7 +50,7 @@
           // console.log($packageXml.find('metadata').find('creator').text());
 
           this.book = {
-            name: $packageXml.find('metadata').find('title').text(),
+            title: $packageXml.find('metadata').find('title').text(),
             author: $packageXml.find('metadata').find('creator').text()
           };
 
@@ -75,15 +79,29 @@
 
           // console.log(tocXml);
 
+          var chapters = [];
+
           $tocXml.find('navPoint').each(function () {
             var $content = $(this).find('content'),
-                // label = $(this).find('navLabel').find('text').text(),
+                label = $(this).find('navLabel').find('text').text(),
                 src = $content.attr('src');
 
             // console.log(src);
 
             navPoints.push(src);
+
+            var navPointFile = zip.folder(mainFolder).file(src).asText(),
+                navPointXml = $.parseXML(navPointFile),
+                $navPointXml = $(navPointXml),
+                chapter = {
+                  label: label,
+                  content: $navPointXml.find('body').html()
+                };
+
+            chapters.push(chapter);
           });
+
+          this.book.chapters = chapters;
 
           $(container).html('');
 
