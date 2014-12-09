@@ -19,7 +19,8 @@ angular.module('readerApp', [
   'ui.bootstrap',
   'angularFileUpload',
   'ngTouch',
-  'ui-rangeSlider'
+  'ui-rangeSlider',
+  'mentelin-epub'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

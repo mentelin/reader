@@ -26,6 +26,7 @@ module.exports = function(config) {
       'client/bower_components/angular-touch/angular-touch.js',
       'client/bower_components/angular-rangeslider/angular.rangeSlider.js',
       'client/bower_components/SVGMagic/src/jquery.svgmagic.js',
+      'client/bower_components/mentelin-epub/epub.service.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',
