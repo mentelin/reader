@@ -6,7 +6,7 @@ div(data-ng-class="checkStandalone()")
                     a.navbar-brand(href="/", title="Mentelin")
                         img.img-responsive(src="assets/img/logo-sm.svg", alt="Mentelin")
 
-                    p.navbar-text.hidden-xs {{ book.author }} «{{ book.title }}» {{ bookG.book }}
+                    p.navbar-text.hidden-xs {{ book.author }} «{{ book.title }}»
 
                 ul.nav.navbar-nav.navbar-right.navbar-btns
                     li.dropdown(data-is-open="isopen.content")
@@ -18,6 +18,11 @@ div(data-ng-class="checkStandalone()")
                         ul.dropdown-menu
                             li
                                 a#btn(href="#", title="Upload from Dropbox", data-ng-click="uploadDropbox()") Upload from Dropbox
+
+                            li
+                                ul.dropdown-list
+                                    li(data-ng-repeat="chapter in book.chapters")
+                                        a(href="#", title="{{ chapter.label }}") {{ chapter.label }}
 
                     li.dropdown(data-is-open="isopen.settings")
                         a.dropdown-toggle(href="#", title="Settings")
